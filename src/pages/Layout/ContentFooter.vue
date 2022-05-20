@@ -19,9 +19,9 @@
       </nav>
       <div class="copyright text-center">
         &copy; {{ new Date().getFullYear() }}
-        <a href="https://www.creative-tim.com/?ref=mdf-vuejs" target="_blank"
-          >Creative Tim</a
-        >, made with <i class="fa fa-heart heart"></i> for a better web
+        <a href="https://github.com/HappyHouse3" target="_blank"
+          >HAPPYHOUSE  </a
+        >, made by | 구미 5반 권도현 박지현
       </div>
     </div>
   </footer>
