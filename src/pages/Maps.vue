@@ -270,15 +270,14 @@
               padding-right: 1.5rem;
             "
           >
-            <option>시도</option>
-            <option>구미시</option>
-            <!-- <option
-              v-for="sido in getSidoList"
+            <option>시/도</option>
+            <option
+              v-for="sido in sidoList"
               v-bind:key="sido.sidoCode"
               :value="sido.sidoCode"
             >
               {{ sido.sidoName }}
-            </option> -->
+            </option>
           </select>
         </div>
 
@@ -293,7 +292,8 @@
             cursor: pointer;
             background-color: transparent;
             border: none;
-            padding-left: 4.5rem;
+            left: 11rem;
+            padding-left: 0.5rem;
           "
         >
           <select
@@ -321,14 +321,14 @@
             "
           >
             <option>구/군</option>
-            <option>구미시</option>
-            <!-- <option
-              v-for="gugun in getGugunList"
+
+            <option
+              v-for="gugun in gugunList"
               v-bind:key="gugun.gugunCode"
               :value="gugun.gugunCode"
             >
               {{ gugun.gugunName }}
-            </option> -->
+            </option>
           </select>
         </div>
 
@@ -343,8 +343,8 @@
             cursor: pointer;
             background-color: transparent;
             border: none;
-            left: 11rem;
-            padding-left: 4.25rem;
+            left: 18rem;
+            padding-left: 2.25rem;
           "
         >
           <select
@@ -372,14 +372,13 @@
             "
           >
             <option>동</option>
-            <option>남통동</option>
-            <!-- <option
-              v-for="dong in getDongList"
+            <option
+              v-for="dong in dongList"
               v-bind:key="dong.dongCode"
               :value="dong.dongCode"
             >
               {{ dong.dongName }}
-            </option> -->
+            </option>
           </select>
         </div>
       </div>
@@ -437,15 +436,19 @@ export default {
       alert: false,
       floatingflag: false,
       floatingflag2: false,
+      sidoList: [],
+      gugunList: [],
+      dongList: [],
     };
   },
   created() {
     http.get(`/map/sido`).then(({ data }) => {
       console.log(data);
+      this.sidoList = data;
+      console.log(this.sidoList);
     });
-    console.log(this.selectedsido);
 
-    this.setSidoList();
+    // this.setSidoList();
   },
   // computed: {
   //   ...mapGetters([
@@ -459,40 +462,40 @@ export default {
   //   ]),
   //   ...mapState(memberStore, ["memberInfo"]),
   // },
-  watch: {
-    "$store.state.map.homes": function () {
-      console.log(this.$store.state.map.homes);
-      this.getPlaces(this.$store.state.map.homes);
-      this.$router.push({ name: "MapSearchList" });
-    },
-    "$store.state.map.subways": function () {
-      this.addConvenienceMarker(this.$store.state.map.subways, "SUB");
-    },
-    "$store.state.map.bicycles": function () {
-      this.addConvenienceMarker(this.$store.state.map.bicycles, "BIC");
-    },
-    "$store.state.kakaoapi.hospitals": function () {
-      this.addConvenienceMarker(this.$store.state.kakaoapi.hospitals, "HOS");
-    },
-    "$store.state.kakaoapi.schools": function () {
-      this.addConvenienceMarker(this.$store.state.kakaoapi.schools, "SCH");
-    },
-    "$store.state.kakaoapi.cafes": function () {
-      this.addConvenienceMarker(this.$store.state.kakaoapi.cafes, "CAF");
-    },
-    "$store.state.kakaoapi.convenients": function () {
-      this.addConvenienceMarker(this.$store.state.kakaoapi.convenients, "CON");
-    },
-    "$store.state.kakaoapi.kids": function () {
-      this.addConvenienceMarker(this.$store.state.kakaoapi.kids, "KID");
-    },
-    "$store.state.map.busstations": function () {
-      this.addConvenienceMarker(this.$store.state.map.busstations, "BUS");
-    },
-    memberInfo: function () {
-      console.log("memberInfo");
-    },
-  },
+  // watch: {
+  //   "$store.state.map.homes": function () {
+  //     console.log(this.$store.state.map.homes);
+  //     this.getPlaces(this.$store.state.map.homes);
+  //     this.$router.push({ name: "MapSearchList" });
+  //   },
+  //   "$store.state.map.subways": function () {
+  //     this.addConvenienceMarker(this.$store.state.map.subways, "SUB");
+  //   },
+  //   "$store.state.map.bicycles": function () {
+  //     this.addConvenienceMarker(this.$store.state.map.bicycles, "BIC");
+  //   },
+  //   "$store.state.kakaoapi.hospitals": function () {
+  //     this.addConvenienceMarker(this.$store.state.kakaoapi.hospitals, "HOS");
+  //   },
+  //   "$store.state.kakaoapi.schools": function () {
+  //     this.addConvenienceMarker(this.$store.state.kakaoapi.schools, "SCH");
+  //   },
+  //   "$store.state.kakaoapi.cafes": function () {
+  //     this.addConvenienceMarker(this.$store.state.kakaoapi.cafes, "CAF");
+  //   },
+  //   "$store.state.kakaoapi.convenients": function () {
+  //     this.addConvenienceMarker(this.$store.state.kakaoapi.convenients, "CON");
+  //   },
+  //   "$store.state.kakaoapi.kids": function () {
+  //     this.addConvenienceMarker(this.$store.state.kakaoapi.kids, "KID");
+  //   },
+  //   "$store.state.map.busstations": function () {
+  //     this.addConvenienceMarker(this.$store.state.map.busstations, "BUS");
+  //   },
+  //   memberInfo: function () {
+  //     console.log("memberInfo");
+  //   },
+  // },
   mounted() {
     console.log("check");
     window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
@@ -517,47 +520,49 @@ export default {
 
     changesido(event) {
       this.selectedsido = event.target.value;
-      this.setGugunList(this.selectedsido);
-      console.log(this.selectedsido);
+      http.get(`/map/gugun/${event.target.value}`).then((response) => {
+        this.gugunList = response.data;
+      });
     },
-    subwaymarker() {
-      //this.addConvenienceMarker(this.getSubwayList, "SUB");
-      this.setSubwayList(this.$store.state.map.curposition);
-      console.log(this.$store.state.map.curposition);
-    },
-    bicyclemarker() {
-      //this.addConvenienceMarker(this.getBicycleList, "BIC");
-      this.setBicycleList(this.$store.state.map.curposition);
-    },
-    busmarker() {
-      //this.addConvenienceMarker(this.getBusList, "BUS");
-      this.setBusList(this.$store.state.map.curposition);
-    },
-    hospitalmarker() {
-      this.setHospitalList(this.$store.state.map.curposition);
-    },
-    schoolmarker() {
-      this.setSchoolList(this.$store.state.map.curposition);
-    },
-    cafemarker() {
-      this.setCafeList(this.$store.state.map.curposition);
-    },
-    convenientmarker() {
-      this.setConvenientList(this.$store.state.map.curposition);
-    },
-    kidmarker() {
-      this.setKidList(this.$store.state.map.curposition);
-    },
+    // subwaymarker() {
+    //   //this.addConvenienceMarker(this.getSubwayList, "SUB");
+    //   this.setSubwayList(this.$store.state.map.curposition);
+    //   console.log(this.$store.state.map.curposition);
+    // },
+    // bicyclemarker() {
+    //   //this.addConvenienceMarker(this.getBicycleList, "BIC");
+    //   this.setBicycleList(this.$store.state.map.curposition);
+    // },
+    // busmarker() {
+    //   //this.addConvenienceMarker(this.getBusList, "BUS");
+    //   this.setBusList(this.$store.state.map.curposition);
+    // },
+    // hospitalmarker() {
+    //   this.setHospitalList(this.$store.state.map.curposition);
+    // },
+    // schoolmarker() {
+    //   this.setSchoolList(this.$store.state.map.curposition);
+    // },
+    // cafemarker() {
+    //   this.setCafeList(this.$store.state.map.curposition);
+    // },
+    // convenientmarker() {
+    //   this.setConvenientList(this.$store.state.map.curposition);
+    // },
+    // kidmarker() {
+    //   this.setKidList(this.$store.state.map.curposition);
+    // },
     changegugun(event) {
-      this.selectedgugun = event.target.value;
-      this.setDongList(this.selectedgugun);
+      console.log(event.target.value);
+      http.get(`/map/dong/${event.target.value}`).then((response) => {
+        this.dongList = response.data;
+      });
     },
-    async changedong(event) {
-      this.selecteddong = event.target.value;
-      console.log(this.selecteddong);
-      await this.setHomeList(this.selecteddong);
-
-      //this.getPlaces(this.$store.state.map.apts);
+    changedong(event) {
+      console.log(event.target.value);
+      http.get(`/map/apt/${event.target.value}`).then((response) => {
+        console.log(response.data);
+      });
     },
     initMap() {
       var container = document.getElementById("map");
