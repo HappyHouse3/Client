@@ -421,6 +421,7 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
+import http from "@/util/http-common";
 
 const memberStore = "memberStore";
 
@@ -439,7 +440,11 @@ export default {
     };
   },
   created() {
+    http.get(`/map/sido`).then(({ data }) => {
+      console.log(data);
+    });
     console.log(this.selectedsido);
+
     this.setSidoList();
   },
   // computed: {
