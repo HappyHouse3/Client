@@ -411,6 +411,95 @@
             alt="축소"
         /></span>
       </div>
+      <div
+        class="aptinfo"
+        style="
+          position: fixed;
+          top: 200px;
+          margin-left: 20px;
+          width: 400px;
+          height: 600px;
+          background-color: white;
+          z-index: 50;
+          border-radius: 1.5rem;
+          overflow-y: scroll;
+        "
+      >
+        <div style="border-bottom: solid 1px black">
+          <h3>우리동네 아파트</h3>
+        </div>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50%, auto));
+          "
+        >
+          <div
+            v-for="(item, index) in aptList"
+            :key="index"
+            style="
+              margin-left: 20px;
+              width: 165px;
+              height: 165px;
+              background-color: #545045;
+              z-index: 50;
+              border-radius: 1rem;
+              margin: 15px;
+              display: grid;
+              justify-content: center;
+            "
+          >
+            <p style="color: white; text-align: center; margin-top: 15px">
+              {{ item.roadAddress }}
+            </p>
+            <h4
+              style="
+                color: white;
+                text-align: center;
+                font-weight: bold;
+                margin: 0px;
+                line-height: 80%;
+              "
+            >
+              {{ item.aptName }}
+            </h4>
+
+            <p style="color: white; text-align: center; line-height: 50%">
+              거래내역보기
+            </p>
+            <div style="display: flex">
+              <button
+                type="button"
+                class="btm_image"
+                id="img_btn"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  padding: 0px;
+                  margin-right: 5px;
+                "
+                @click="naverOpen(item.searchKeyword)"
+              >
+                <img src="../assets/img/naver.jpg" />
+              </button>
+              <button
+                type="button"
+                class="btm_image"
+                id="img_btn"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  padding: 0px;
+                  margin-left: 5px;
+                "
+                @click="youtubeOpen(item.searchKeyword)"
+              >
+                <img src="../assets/img/youtube.jpg" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- <div class="container mx-auto sm:flex py-5 sm:py-10 mt-10 sm:mt-20">
@@ -439,6 +528,7 @@ export default {
       sidoList: [],
       gugunList: [],
       dongList: [],
+      aptList: [],
     };
   },
   created() {
@@ -518,6 +608,18 @@ export default {
     ...mapMutations(["SET_HOME", "SET_POSITION", "SET_REVIEW_HOMECODE"]),
     ...mapActions(memberStore, ["addInterest", "removeInterest"]),
 
+    naverOpen(searchKeyword) {
+      window.open(
+        `https://search.naver.com/search.naver?query=${searchKeyword}`,
+        "_blank"
+      );
+    },
+    youtubeOpen(searchKeyword) {
+      window.open(
+        `https://www.youtube.com/results?app=desktop&search_query=${searchKeyword}`,
+        "_blank"
+      );
+    },
     changesido(event) {
       this.selectedsido = event.target.value;
       http.get(`/map/gugun/${event.target.value}`).then((response) => {
@@ -561,7 +663,9 @@ export default {
     changedong(event) {
       console.log(event.target.value);
       http.get(`/map/apt/${event.target.value}`).then((response) => {
+        console.log("아파트 정보확인");
         console.log(response.data);
+        this.aptList = response.data;
       });
     },
     initMap() {
