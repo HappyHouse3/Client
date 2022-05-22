@@ -413,6 +413,7 @@
       </div>
       <div
         class="aptinfo"
+        id="myDIV"
         style="
           position: fixed;
           top: 200px;
@@ -423,10 +424,17 @@
           z-index: 50;
           border-radius: 1.5rem;
           overflow-y: scroll;
+          display: none;
         "
       >
-        <div style="border-bottom: solid 1px black">
-          <h3>우리동네 아파트</h3>
+        <div style="border-bottom: solid 1px black; display: block">
+          <h3 style="display: inline-block">우리동네 아파트</h3>
+          <button
+            @click="closeList"
+            style="float: right; height: 30px; width: 30px"
+          >
+            <b-icon icon="search"></b-icon>
+          </button>
         </div>
         <div
           style="
@@ -449,7 +457,14 @@
               justify-content: center;
             "
           >
-            <p style="color: white; text-align: center; margin-top: 15px">
+            <p
+              style="
+                color: #ffcd4a;
+                text-align: center;
+                margin-top: 15px;
+                font-weight: bold;
+              "
+            >
               {{ item.roadAddress }}
             </p>
             <h4
@@ -667,6 +682,16 @@ export default {
         console.log(response.data);
         this.aptList = response.data;
       });
+      var con = document.getElementById("myDIV");
+      if (con.style.display == "none") {
+        con.style.display = "block";
+      }
+    },
+    closeList() {
+      var con = document.getElementById("myDIV");
+      if (con.style.display == "block") {
+        con.style.display = "none";
+      }
     },
     initMap() {
       var container = document.getElementById("map");
