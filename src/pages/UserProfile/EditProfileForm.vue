@@ -140,6 +140,7 @@
 </template>
 <script>
 import http from "@/util/http-common";
+import tokenDecoder from "@/util/token-decoder";
 export default {
   name: "edit-profile-form",
   props: {
@@ -160,6 +161,8 @@ export default {
   },
   created() {
     this.token = sessionStorage.getItem("access-token");
+    console.log("토큰 찍어요");
+    console.log(tokenDecoder.decode(this.token));
   },
   methods: {
     onSubmit(event) {

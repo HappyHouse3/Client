@@ -26,11 +26,6 @@
             </md-autocomplete>
           </div>
           <md-list>
-            <md-list-item href="#/">
-              <i class="material-icons">dashboard</i>
-              <p class="hidden-lg hidden-md">Dashboard</p>
-            </md-list-item>
-
             <!-- <md-list-item href="#/notifications" class="dropdown">
               <drop-down>
                 <a slot="title" class="dropdown-toggle" data-toggle="dropdown">
@@ -77,9 +72,18 @@
             </li>
 
             <md-list-item v-if="token">
-              <p style="cursor: pointer" @click="logout">로그아웃</p>
+              <p>
+                {{ payload.nickName }}님 안녕하세요! &nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+              <p style="cursor: pointer; color: blue" @click="logout">
+                로그아웃
+              </p>
               <!--<i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Profile</p>-->
+            </md-list-item>
+            <md-list-item v-else href="./login">
+              <i class="material-icons">person</i>
+              <p class="hidden-lg hidden-md">person</p>
             </md-list-item>
           </md-list>
         </div>
@@ -89,6 +93,8 @@
 </template>
 
 <script>
+import tokenDecoder from "@/util/token-decoder";
+
 export default {
   data() {
     return {
@@ -104,10 +110,12 @@ export default {
         "Kevin Malone",
       ],
       token: null,
+      payload: null,
     };
   },
   created() {
     this.token = sessionStorage.getItem("access-token");
+    this.payload = tokenDecoder.decode(this.token);
   },
   methods: {
     toggleSidebar() {
