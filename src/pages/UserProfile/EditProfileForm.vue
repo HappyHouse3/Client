@@ -60,6 +60,12 @@
           </div>
 
           <div class="md-layout-item md-size-100 text-right">
+            <md-button
+              class="md-raised md-success"
+              style="margin-right: 20px"
+              @click="withDrawal"
+              >회원탈퇴</md-button
+            >
             <md-button class="md-raised md-success" @click="onSubmit2"
               >정보수정</md-button
             >
@@ -184,12 +190,24 @@ export default {
 
       let err = true;
       let msg = "";
-      !this.nickName && ((msg = "작성자 입력해주세요"), (err = false));
+      !this.password && ((msg = "비밀번호를 입력해주세요"), (err = false));
 
       if (!err) alert(msg);
       else {
         this.updateMember();
       }
+    },
+    withDrawal() {
+      http
+        .delete(`/user/${this.userNo}`)
+        .then(({ data }) => {
+          sessionStorage.removeItem("access-token");
+          alert("회원 탈퇴가 완료되었습니다.");
+          location.href = "/";
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     registMember() {
       http
