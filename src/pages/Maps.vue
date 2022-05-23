@@ -479,7 +479,10 @@
               {{ item.aptName }}
             </h4>
 
-            <p style="color: white; text-align: center; line-height: 50%">
+            <p
+              style="color: white; text-align: center; line-height: 50%"
+              @click="getAptDeals(item.aptCode)"
+            >
               거래내역보기
             </p>
             <div style="display: flex">
@@ -544,6 +547,7 @@ export default {
       gugunList: [],
       dongList: [],
       aptList: [],
+      aptDeals: [],
     };
   },
   created() {
@@ -1089,6 +1093,19 @@ export default {
     closefloating2() {
       this.floatingflag2 = false;
     },
+    getAptDeals(aptCode) {
+      console.log("마커 클릭 이벤트 ");
+      console.log(aptCode);
+      http
+        .get(`/map/apt/${aptCode}/deal`)
+        .then(({ data }) => {
+          this.aptDeals = data;
+        })
+        .catch((error) => {
+          alert("데이터 로드 실패");
+          console.log(error);
+        });
+    },
   },
   watch: {
     aptList: function () {
@@ -1102,10 +1119,23 @@ export default {
 
       this.aptList.forEach((apt) => {
         let markerPosition = new kakao.maps.LatLng(apt.lat, apt.lng);
-        let marker = new kakao.maps.Marker({ position: markerPosition });
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+          clickable: true,
+        });
+
+        marker.aptCode = apt.aptCode;
+
+        // 마커에 이벤트 등록
+        kakao.maps.event.addListener(marker, "click", () => {
+          this.getAptDeals(marker.aptCode);
+        });
+
         this.apt_markers.push(marker);
         marker.setMap(this.map);
       });
+      console.log("아파트 마커 입니다.");
+      console.log(this.apt_markers);
     },
   },
   // computed: {
