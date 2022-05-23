@@ -11,19 +11,19 @@
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>닉네임</label>
-              <md-input v-model="username" type="text"></md-input>
+              <md-input v-model="nickName" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>이메일</label>
-              <md-input v-model="emailadress" type="email"></md-input>
+              <md-input v-model="email" type="email"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>아이디</label>
-              <md-input v-model="id" type="text"></md-input>
+              <md-input v-model="userId" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
@@ -80,19 +80,19 @@
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>닉네임</label>
-              <md-input v-model="username" type="text"></md-input>
+              <md-input v-model="nickName" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>이메일</label>
-              <md-input v-model="emailadress" type="email"></md-input>
+              <md-input v-model="email" type="email"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>아이디</label>
-              <md-input v-model="id" type="text"></md-input>
+              <md-input v-model="userId" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
@@ -151,10 +151,11 @@ export default {
   },
   data() {
     return {
-      username: null,
-      emailadress: null,
-      id: null,
+      userNo: null,
+      userId: null,
       password: null,
+      nickName: null,
+      email: null,
       city: null,
       token: null,
     };
@@ -162,7 +163,7 @@ export default {
   created() {
     this.token = sessionStorage.getItem("access-token");
     console.log("토큰 찍어요");
-    console.log(tokenDecoder.decode(this.token));
+    this.initData(tokenDecoder.decode(this.token));
   },
   methods: {
     onSubmit(event) {
@@ -171,7 +172,7 @@ export default {
 
       let err = true;
       let msg = "";
-      !this.username && ((msg = "작성자 입력해주세요"), (err = false));
+      !this.nickName && ((msg = "작성자 입력해주세요"), (err = false));
 
       if (!err) alert(msg);
       else {
@@ -182,14 +183,29 @@ export default {
       http
         .post(`/signup`, {
           nickName: this.username,
-          email: this.emailadress,
-          userId: this.id,
+          email: this.email,
+          userId: this.userId,
           password: this.password,
           sidoName: this.city,
         })
         .then(({ data }) => {
           alert("등록이 완료되었습니다.");
           location.href = "./login";
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    initData(payload) {
+      this.userNo = payload.userNo;
+      http
+        .get(`/user/${this.userNo}`)
+        .then(({ data }) => {
+          this.userId = data.userId;
+          this.password = data.password;
+          this.nickName = data.nickName;
+          this.email = data.email;
+          this.city = data.sidoName;
         })
         .catch((error) => {
           console.log(error);
