@@ -1,10 +1,14 @@
 import jwt_decode from "jwt-decode";
 
 export default {
-  getRoleType(token) {
-    return jwt_decode(token).roleType;
+  token: sessionStorage.getItem("access-token"),
+  getRoleType() {
+    return jwt_decode(this.token).roleType;
   },
   isAdmin() {
-    return jwt_decode(token).roleType.find("ROLE_ADMIN") !== undefined;
+    console.log("프린트 롤타입");
+    console.log(jwt_decode(this.token).roleType);
+    let roleList = jwt_decode(this.token).roleType;
+    return roleList.filter((item) => item == "ROLE_ADMIN").length != 0;
   },
 };
