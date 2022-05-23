@@ -35,9 +35,9 @@
 
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>City</label><br />
+              <label>거주 지역</label>
 
-              <select v-model="city">
+              <select v-model="city" style="margin: 50px 0px 20px 0px">
                 <option>서울특별시</option>
                 <option>부산광역시</option>
                 <option>대구광역시</option>
