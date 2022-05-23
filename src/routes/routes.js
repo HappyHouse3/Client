@@ -5,6 +5,7 @@ import UserProfile from "@/pages/UserProfile.vue";
 import UserLogin from "@/pages/UserLogin.vue";
 import TableList from "@/pages/TableList.vue";
 import NoticeUpload from "@/pages/NoticeUpload.vue";
+import NoticeDetail from "@/pages/NoticeDetail.vue";
 import Typography from "@/pages/Typography.vue";
 import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
@@ -34,6 +35,12 @@ const routes = [
         path: "notice",
         name: "Notice",
         component: TableList,
+      },
+      {
+        path: "notice/detail",
+        name: "Notice Detail",
+        component: NoticeDetail,
+        props: true,
       },
       {
         path: "notice/upload",

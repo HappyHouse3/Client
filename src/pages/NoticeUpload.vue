@@ -18,6 +18,7 @@
                 placeholder="제목을 입력하세요"
                 v-model="title"
               />
+              <!--
 
               <textarea
                 id="content"
@@ -25,7 +26,9 @@
                 rows="10"
                 max-rows="15"
                 v-model="content"
-              ></textarea>
+              ></textarea>-->
+
+              <Editor ref="toastuiEditor" />
 
               <button
                 type="submit"
@@ -47,6 +50,9 @@
 <script>
 import http from "@/util/http-common";
 import tokenDecoder from "@/util/token-decoder";
+//import "codemirror/lib/codemirror.css";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor } from "@toast-ui/vue-editor";
 
 export default {
   data() {
@@ -57,12 +63,16 @@ export default {
       token: null,
     };
   },
+  components: {
+    Editor,
+  },
   created() {
     this.token = sessionStorage.getItem("access-token");
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
+      this.content = this.$refs.toastuiEditor.invoke("getMarkdown");
       console.log("click!");
 
       let err = true;

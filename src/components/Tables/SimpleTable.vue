@@ -1,11 +1,18 @@
 <template>
   <div>
-    <div v-if="users != null">
-      <md-table v-model="users" :table-header-color="tableHeaderColor">
+    <div v-if="noticeList != null">
+      <md-table v-model="noticeList" :table-header-color="tableHeaderColor">
         <md-table-row slot="md-table-row" slot-scope="{ item }">
           <md-table-cell md-label="순번">{{ item.id }}</md-table-cell>
-          <md-table-cell md-label="제목">{{ item.title }}</md-table-cell>
-          <md-table-cell md-label="작성자">{{ item.nickName }}</md-table-cell>
+          <md-table-cell md-label="제목"
+            ><router-link
+              :to="{ name: 'Notice Detail', params: { boardId: item.id } }"
+              >{{ item.title }}</router-link
+            ></md-table-cell
+          >
+          <md-table-cell md-label="작성자">{{
+            item.userNickName
+          }}</md-table-cell>
           <md-table-cell md-label="작성일">{{ item.regTime }}</md-table-cell>
         </md-table-row>
       </md-table>
@@ -24,6 +31,7 @@ import http from "@/util/http-common";
 
 export default {
   name: "simple-table",
+
   props: {
     tableHeaderColor: {
       type: String,
@@ -33,7 +41,7 @@ export default {
   data() {
     return {
       selected: [],
-      users: [],
+      noticeList: [],
     };
   },
   created() {
@@ -41,7 +49,7 @@ export default {
       .get("/notice")
       .then((response) => {
         console.log(response.data);
-        this.users = response.data;
+        this.noticeList = response.data;
       })
       .catch((error) => {
         console.log(error);
