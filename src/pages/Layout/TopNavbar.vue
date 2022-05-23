@@ -76,9 +76,10 @@
               </a>
             </li>
 
-            <md-list-item href="#/user">
-              <i class="material-icons">person</i>
-              <p class="hidden-lg hidden-md">Profile</p>
+            <md-list-item v-if="token">
+              <p style="cursor: pointer" @click="logout">로그아웃</p>
+              <!--<i class="material-icons">person</i>
+              <p class="hidden-lg hidden-md">Profile</p>-->
             </md-list-item>
           </md-list>
         </div>
@@ -102,11 +103,20 @@ export default {
         "Ryan Howard",
         "Kevin Malone",
       ],
+      token: null,
     };
+  },
+  created() {
+    this.token = sessionStorage.getItem("access-token");
   },
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    },
+    logout() {
+      console.log("로그아웃");
+      sessionStorage.removeItem("access-token");
+      location.href = "/";
     },
   },
 };

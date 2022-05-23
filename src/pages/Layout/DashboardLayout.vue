@@ -13,7 +13,9 @@
       </sidebar-link>
       <sidebar-link to="/user">
         <md-icon>person</md-icon>
-        <p>프로필</p>
+
+        <p v-if="token">프로필</p>
+        <p v-else>회원가입</p>
       </sidebar-link>
       <sidebar-link to="/table">
         <md-icon>content_paste</md-icon>
@@ -68,7 +70,11 @@ export default {
     return {
       sidebarBackground: "green",
       sidebarBackgroundImage: require("@/assets/img/sidebar-2.jpg"),
+      token: null,
     };
+  },
+  created() {
+    this.token = sessionStorage.getItem("access-token");
   },
 };
 </script>

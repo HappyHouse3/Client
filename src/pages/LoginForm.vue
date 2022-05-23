@@ -71,9 +71,13 @@ export default {
         })
         .then(({ data }) => {
           console.log(data);
+
           alert("로그인 성공했습니다.");
+          sessionStorage.setItem("access-token", data.token);
+          location.href = "/";
         })
         .catch((error) => {
+          alert("아이디/비밀번호를 확인하세요!");
           console.log(error);
         });
     },
