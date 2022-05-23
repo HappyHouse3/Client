@@ -2,74 +2,67 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">Edit Profile</h4>
-        <p class="category">Complete your profile</p>
+        <h4 class="title">회원가입</h4>
+        <p class="category">회원가입 폼을 입력하세요</p>
       </md-card-header>
 
       <md-card-content>
         <div class="md-layout">
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>Company (disabled)</label>
-              <md-input v-model="disabled" disabled></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>User Name</label>
+              <label>닉네임</label>
               <md-input v-model="username" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>Email Address</label>
+              <label>이메일</label>
               <md-input v-model="emailadress" type="email"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>First Name</label>
-              <md-input v-model="firstname" type="text"></md-input>
+              <label>아이디</label>
+              <md-input v-model="id" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>Last Name</label>
-              <md-input v-model="lastname" type="text"></md-input>
+              <label>비밀번호</label>
+              <md-input v-model="password" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-100">
-            <md-field>
-              <label>Adress</label>
-              <md-input v-model="address" type="text"></md-input>
-            </md-field>
-          </div>
+
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>City</label>
-              <md-input v-model="city" type="text"></md-input>
+              <label>City</label><br />
+
+              <select v-model="city">
+                <option>서울특별시</option>
+                <option>부산광역시</option>
+                <option>대구광역시</option>
+                <option>인천광역시</option>
+                <option>광주광역시</option>
+                <option>대전광역시</option>
+                <option>울산광역시</option>
+                <option>세종특별자치시</option>
+                <option>경기도</option>
+                <option>강원도</option>
+                <option>충청북도</option>
+                <option>충청남도</option>
+                <option>전라북도</option>
+                <option>전라남도</option>
+                <option>경상북도</option>
+                <option>경상남도</option>
+                <option>제주특별자치도</option>
+              </select>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Country</label>
-              <md-input v-model="country" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Postal Code</label>
-              <md-input v-model="code" type="number"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-size-100">
-            <md-field maxlength="5">
-              <label>About Me</label>
-              <md-textarea v-model="aboutme"></md-textarea>
-            </md-field>
-          </div>
+
           <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success">Update Profile</md-button>
+            <md-button class="md-raised md-success" @click="onSubmit"
+              >회원가입</md-button
+            >
           </div>
         </div>
       </md-card-content>
@@ -77,6 +70,7 @@
   </form>
 </template>
 <script>
+import http from "@/util/http-common";
 export default {
   name: "edit-profile-form",
   props: {
@@ -88,17 +82,43 @@ export default {
   data() {
     return {
       username: null,
-      disabled: null,
       emailadress: null,
-      lastname: null,
-      firstname: null,
-      address: null,
+      id: null,
+      password: null,
       city: null,
-      country: null,
-      code: null,
-      aboutme:
-        "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.",
     };
+  },
+
+  methods: {
+    onSubmit(event) {
+      event.preventDefault();
+      console.log("click!");
+
+      let err = true;
+      let msg = "";
+      !this.username && ((msg = "작성자 입력해주세요"), (err = false));
+
+      if (!err) alert(msg);
+      else {
+        this.registMember();
+      }
+    },
+    registMember() {
+      http
+        .post(`/signup`, {
+          nickName: this.username,
+          email: this.emailadress,
+          userId: this.id,
+          password: this.password,
+          sidoName: this.city,
+        })
+        .then(({ data }) => {
+          alert("등록이 완료되었습니다.");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
