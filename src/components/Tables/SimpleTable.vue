@@ -1,17 +1,27 @@
 <template>
   <div>
-    <md-table v-model="users" :table-header-color="tableHeaderColor">
-      <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Country">{{ item.country }}</md-table-cell>
-        <md-table-cell md-label="City">{{ item.city }}</md-table-cell>
-        <md-table-cell md-label="Salary">{{ item.salary }}</md-table-cell>
-      </md-table-row>
-    </md-table>
+    <div v-if="users != null">
+      <md-table v-model="users" :table-header-color="tableHeaderColor">
+        <md-table-row slot="md-table-row" slot-scope="{ item }">
+          <md-table-cell md-label="순번">{{ item.id }}</md-table-cell>
+          <md-table-cell md-label="제목">{{ item.title }}</md-table-cell>
+          <md-table-cell md-label="작성자">{{ item.nickName }}</md-table-cell>
+          <md-table-cell md-label="작성일">{{ item.regTime }}</md-table-cell>
+        </md-table-row>
+      </md-table>
+      <div class="md-layout-item md-size-100 text-right">
+        <md-button class="md-raised md-success" @click="upload"
+          >글쓰기</md-button
+        >
+      </div>
+    </div>
+    <div v-else><p></p></div>
   </div>
 </template>
 
 <script>
+import http from "@/util/http-common";
+
 export default {
   name: "simple-table",
   props: {
@@ -23,45 +33,24 @@ export default {
   data() {
     return {
       selected: [],
-      users: [
-        {
-          name: "Dakota Rice",
-          salary: "$36,738",
-          country: "Niger",
-          city: "Oud-Turnhout",
-        },
-        {
-          name: "Minerva Hooper",
-          salary: "$23,738",
-          country: "Curaçao",
-          city: "Sinaai-Waas",
-        },
-        {
-          name: "Sage Rodriguez",
-          salary: "$56,142",
-          country: "Netherlands",
-          city: "Overland Park",
-        },
-        {
-          name: "Philip Chaney",
-          salary: "$38,735",
-          country: "Korea, South",
-          city: "Gloucester",
-        },
-        {
-          name: "Doris Greene",
-          salary: "$63,542",
-          country: "Malawi",
-          city: "Feldkirchen in Kārnten",
-        },
-        {
-          name: "Mason Porter",
-          salary: "$78,615",
-          country: "Chile",
-          city: "Gloucester",
-        },
-      ],
+      users: [],
     };
+  },
+  created() {
+    http
+      .get("/notice")
+      .then((response) => {
+        console.log(response.data);
+        this.users = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  methods: {
+    upload() {
+      location.href = "./notice/upload";
+    },
   },
 };
 </script>

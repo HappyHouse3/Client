@@ -17,7 +17,7 @@
         <p v-if="token">프로필</p>
         <p v-else>회원가입</p>
       </sidebar-link>
-      <sidebar-link to="/table">
+      <sidebar-link to="/notice">
         <md-icon>content_paste</md-icon>
         <p>공지사항</p>
       </sidebar-link>

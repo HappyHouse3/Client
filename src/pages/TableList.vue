@@ -6,8 +6,8 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">Simple Table</h4>
-            <p class="category">Here is a subtitle for this table</p>
+            <h4 class="title">공지사항</h4>
+            <p class="category">이곳은 공지사항 게시판입니다.</p>
           </md-card-header>
           <md-card-content>
             <simple-table table-header-color="green"></simple-table>

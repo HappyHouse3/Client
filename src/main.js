@@ -15,6 +15,9 @@ import MaterialDashboard from "./material-dashboard";
 
 import Chartist from "chartist";
 // import store from "./store";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+// import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap-vue/dist/bootstrap-vue.css";
 
 // configure router
 const router = new VueRouter({
@@ -30,6 +33,7 @@ Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
+
 // Vue.use(store);
 
 /* eslint-disable no-new */
