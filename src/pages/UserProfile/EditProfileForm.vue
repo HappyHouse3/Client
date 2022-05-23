@@ -23,7 +23,7 @@
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>아이디</label>
-              <md-input v-model="userId" type="text"></md-input>
+              <md-input v-model="userId" type="text" readonly></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
@@ -60,8 +60,8 @@
           </div>
 
           <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success" @click="onSubmit"
-              >회원가입</md-button
+            <md-button class="md-raised md-success" @click="onSubmit2"
+              >정보수정</md-button
             >
           </div>
         </div>
@@ -162,7 +162,6 @@ export default {
   },
   created() {
     this.token = sessionStorage.getItem("access-token");
-    console.log("토큰 찍어요");
     this.initData(tokenDecoder.decode(this.token));
   },
   methods: {
@@ -179,10 +178,23 @@ export default {
         this.registMember();
       }
     },
+    onSubmit2(event) {
+      event.preventDefault();
+      console.log("click!");
+
+      let err = true;
+      let msg = "";
+      !this.nickName && ((msg = "작성자 입력해주세요"), (err = false));
+
+      if (!err) alert(msg);
+      else {
+        this.updateMember();
+      }
+    },
     registMember() {
       http
         .post(`/signup`, {
-          nickName: this.username,
+          nickName: this.nickName,
           email: this.email,
           userId: this.userId,
           password: this.password,
@@ -191,6 +203,23 @@ export default {
         .then(({ data }) => {
           alert("등록이 완료되었습니다.");
           location.href = "./login";
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    updateMember() {
+      http
+        .put(`/user/${this.userNo}`, {
+          nickName: this.nickName,
+          email: this.email,
+          password: this.password,
+          sidoName: this.city,
+        })
+        .then(({ data }) => {
+          sessionStorage.setItem("access-token", data.token);
+          alert("수정이 완료되었습니다.");
+          location.href = "./user";
         })
         .catch((error) => {
           console.log(error);
