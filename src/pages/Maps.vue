@@ -536,7 +536,7 @@ export default {
       selectedgugun: "",
       selecteddong: "",
       apt_markers: [],
-      convenient_markers: [],
+      markers_postion: [],
       alert: false,
       floatingflag: false,
       floatingflag2: false,
@@ -677,11 +677,29 @@ export default {
     },
     changedong(event) {
       console.log(event.target.value);
-      http.get(`/map/apt/${event.target.value}`).then((response) => {
-        console.log("아파트 정보확인");
-        console.log(response.data);
-        this.aptList = response.data;
-      });
+      http
+        .get(`/map/apt/${event.target.value}`)
+        .then((response) => {
+          console.log("아파트 정보확인");
+          console.log(response.data);
+          this.aptList = response.data;
+        })
+        .then(() => {
+          let totalLat = 0;
+          let totalLng = 0;
+
+          this.aptList.forEach(({ lng, lat }) => {
+            totalLng += parseFloat(lng);
+            totalLat += parseFloat(lat);
+          });
+
+          let avgLat = totalLat / this.aptList.length;
+          let avgLng = totalLng / this.aptList.length;
+
+          if (totalLat) {
+            this.map.setCenter(new kakao.maps.LatLng(avgLat, avgLng));
+          }
+        });
       var con = document.getElementById("myDIV");
       if (con.style.display == "none") {
         con.style.display = "block";
@@ -1071,6 +1089,29 @@ export default {
       this.floatingflag2 = false;
     },
   },
+  watch: {
+    aptList: function () {
+      console.log("마커 찍기");
+      this.apt_markers.forEach((marker) => {
+        marker.setMap(null);
+        console.log("마커 지우기");
+      });
+
+      this.apt_markers = [];
+
+      this.aptList.forEach((apt) => {
+        let markerPosition = new kakao.maps.LatLng(apt.lat, apt.lng);
+        let marker = new kakao.maps.Marker({ position: markerPosition });
+        this.apt_markers.push(marker);
+        marker.setMap(this.map);
+      });
+    },
+  },
+  // computed: {
+  //   aptListTemp: function () {
+  //     return this.aptList;
+  //   },
+  // },
 };
 </script>
 
