@@ -698,6 +698,7 @@ export default {
 
           if (totalLat) {
             this.map.setCenter(new kakao.maps.LatLng(avgLat, avgLng));
+            this.map.setLevel(6);
           }
         });
       var con = document.getElementById("myDIV");
