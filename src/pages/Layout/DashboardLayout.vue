@@ -21,13 +21,17 @@
         <md-icon>content_paste</md-icon>
         <p>공지사항</p>
       </sidebar-link>
+      <sidebar-link to="/board">
+        <md-icon>content_paste</md-icon>
+        <p>지역별 게시판</p>
+      </sidebar-link>
+      <sidebar-link to="/qna">
+        <md-icon>library_books</md-icon>
+        <p>Q&A</p>
+      </sidebar-link>
       <sidebar-link to="/dashboard">
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
-      </sidebar-link>
-      <sidebar-link to="/typography">
-        <md-icon>library_books</md-icon>
-        <p>Typography</p>
       </sidebar-link>
       <sidebar-link to="/notifications">
         <md-icon>notifications</md-icon>

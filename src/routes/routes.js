@@ -6,7 +6,8 @@ import UserLogin from "@/pages/UserLogin.vue";
 import TableList from "@/pages/TableList.vue";
 import NoticeUpload from "@/pages/NoticeUpload.vue";
 import NoticeDetail from "@/pages/NoticeDetail.vue";
-import Typography from "@/pages/Typography.vue";
+import QnaBoard from "@/pages/QnaBoard.vue";
+import RegionBoard from "@/pages/RegionBoard.vue";
 import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 
@@ -48,9 +49,14 @@ const routes = [
         component: NoticeUpload,
       },
       {
-        path: "typography",
-        name: "Typography",
-        component: Typography,
+        path: "qna",
+        name: "Q&A Board",
+        component: QnaBoard,
+      },
+      {
+        path: "board",
+        name: "Region Board",
+        component: RegionBoard,
       },
       {
         path: "maps",
