@@ -954,128 +954,6 @@ export default {
         })(marker);
       }
     },
-    //displayInfowindow: (marker, title) => {},
-    addAptMarker(positions, homes) {
-      var bounds = new kakao.maps.LatLngBounds();
-      var idx = 0;
-      //아파트숫자 마커 등록
-      for (const position of positions) {
-        bounds.extend(position);
-        console.log(position);
-        var imageSrc = "";
-        var imageSize = "";
-        var imageOption = "";
-        if (homes[idx].type == "A") {
-          console.log("아파트뿌려주기");
-          (imageSrc = require("@/assets/img/apart.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-            (imageSize = new kakao.maps.Size(45, 45)); // 마커 이미지의 크기
-        }
-        if (homes[idx].type == "O") {
-          console.log("오피스텔뿌려주기");
-          (imageSrc = require("@/assets/img/office.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-            (imageSize = new kakao.maps.Size(45, 45)); // 마커 이미지의 크기
-        }
-        if (homes[idx].type == "H") {
-          console.log("주택뿌려주기");
-          (imageSrc = require("@/assets/img/home.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-            (imageSize = new kakao.maps.Size(45, 45)), // 마커 이미지의 크기
-            (imageOption = { offset: new kakao.maps.Point(27, 69) });
-        }
-        marker = new kakao.maps.Marker({
-          position: position, // 마커의 위치
-          image: markerImage,
-        });
-        var markerImage = new kakao.maps.MarkerImage(
-          imageSrc,
-          imageSize,
-          imageOption
-        );
-        var marker = new kakao.maps.Marker({
-          position: position, // 마커의 위치
-          image: markerImage,
-        });
-        // }
-
-        console.log(marker.getPosition());
-        marker.setMap(this.map); // 지도 위에 마커를 표출합니다
-        this.apt_markers.push(marker); // 배열에 생성된 마커를 추가합니다
-        var map = this.map;
-        var mapCustomOverlay;
-        let self = this;
-        let imgPath = require("@/assets/img/apt.png");
-        let imgPath2 = require("@/assets/img/house_green.png");
-
-        (function (marker, home, position) {
-          kakao.maps.event.addListener(marker, "mouseover", () => {
-            //this.displayInfowindow(marker, title);
-            console.log(position);
-
-            console.log(
-              home.avgPrice + " " + home.recentPrice + " " + home.homeName
-            );
-            console.log(home);
-
-            var content = '<div class="custom_overlay_info">';
-            content +=
-              `    <a target="_blank"><img src="${imgPath2}" alt="" style="margin-bottom:5px; margin-right:5px; float:left; height:30px; width=30px;"><strong>` +
-              home.homeName +
-              `</strong></a>`;
-            content += '    <div class="desc">';
-            content += `<img src="${imgPath}" alt="" style="height:60px; width=80px;">`;
-            if (home.avgPrice == null) {
-              content +=
-                `<span v-if="home.avgPrice!=null"class="address"> ` +
-                `<p class="text-sm text-gray-600">
-          <div><strong>매매내역이</strong></div><div><strong> 확인되지 않습니다.</strong></div>
-        </p>
-              </span>`;
-            } else {
-              content +=
-                `<span v-if="home.avgPrice!=null"class="address"> ` +
-                `<p class="text-sm text-gray-600">
-          평균금액 : ${home.avgPrice}
-        </p>
-        <p class="text-sm text-gray-600">
-          최신금액 : ${home.recentPrice}
-        </p>
-              </span>`;
-            }
-
-            content += "    </div>";
-            content += "</div>";
-
-            // 커스텀 오버레이를 생성합니다
-            mapCustomOverlay = new kakao.maps.CustomOverlay({
-              position: marker.getPosition(),
-              content: content,
-              xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
-              yAnchor: 1.3, // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
-            });
-
-            self.SET_HOME({ homeCode: home.homeCode });
-            self.SET_POSITION({ position: position });
-            self.SET_REVIEW_HOMECODE({ homeCode: home.homeCode });
-            self.$router.push({ name: "MapInfo" });
-            // 커스텀 오버레이를 지도에 표시합니다
-            console.log(position);
-            mapCustomOverlay.setMap(map);
-            console.log(home.homeCode);
-          });
-
-          kakao.maps.event.addListener(marker, "mouseout", function () {
-            mapCustomOverlay.setMap(null);
-          });
-
-          //클릭시
-          // kakao.maps.event.addListener(marker, "click", function() {
-
-          // });
-        })(marker, homes[idx], position);
-        idx++;
-      }
-      this.map.setBounds(bounds);
-    },
-
     async getPlaces(homes) {
       // 주소-좌표 변환 객체를 생성합니다
       var geocoder = new kakao.maps.services.Geocoder();
@@ -1190,6 +1068,10 @@ export default {
           alert("데이터 로드 실패");
           console.log(error);
         });
+      if (this.aptDeals.length > 0) {
+        this.curAptCode = aptCode;
+      }
+      console.log("선택된 아파트 코드" + this.curAptCode);
     },
   },
   watch: {
@@ -1219,11 +1101,6 @@ export default {
         this.apt_markers.push(marker);
         marker.setMap(this.map);
       });
-      if (this.aptList.length > 0) {
-        this.curAptCode = this.aptList[0].aptCode;
-      }
-      console.log("아파트 마커 입니다.");
-      console.log(this.apt_markers);
     },
   },
   // computed: {
