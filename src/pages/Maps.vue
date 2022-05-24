@@ -480,7 +480,12 @@
             </h4>
 
             <p
-              style="color: white; text-align: center; line-height: 50%"
+              style="
+                color: white;
+                text-align: center;
+                cursor: pointer;
+                line-height: 50%;
+              "
               @click="getAptDeals(item.aptCode)"
             >
               거래내역보기
