@@ -16,4 +16,8 @@
     <b-button href="#" variant="primary">Go somewhere</b-button>
   </b-card>
 </template>
-<script></script>
+<script>
+export default {
+  props: {},
+};
+</script>

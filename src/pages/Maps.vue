@@ -569,7 +569,7 @@
                 <house-infra />
               </b-tab>
               <b-tab title="리뷰">
-                <house-review />
+                <house-review :curAptCode="curAptCode" />
               </b-tab>
             </b-tabs>
           </b-card>
@@ -609,6 +609,7 @@ export default {
       dongList: [],
       aptList: [],
       aptDeals: [],
+      curAptCode: null,
     };
   },
   components: {
@@ -1213,6 +1214,9 @@ export default {
         this.apt_markers.push(marker);
         marker.setMap(this.map);
       });
+      if (this.aptList.length > 0) {
+        this.curAptCode = this.aptList[0].aptCode;
+      }
       console.log("아파트 마커 입니다.");
       console.log(this.apt_markers);
     },
