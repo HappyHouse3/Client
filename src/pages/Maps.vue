@@ -424,7 +424,7 @@
           height: 600px;
           background-color: white;
           z-index: 50;
-          border-radius: 1.5rem;
+          border-radius: 0.9rem;
           overflow-y: scroll;
           display: none;
         "
