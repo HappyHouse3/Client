@@ -575,7 +575,7 @@
               </b-tab>
 
               <b-tab title="인프라" style="height: 100%">
-                <house-infra />
+                <house-infra :curHouseInfo="curHouseInfo" />
               </b-tab>
               <b-tab title="리뷰" style="height: 100% !important">
                 <house-review :curAptCode="curAptCode" />
@@ -619,6 +619,7 @@ export default {
       aptList: [],
       aptDeals: [],
       curAptCode: null,
+      curHouseInfo: null,
     };
   },
   components: {
@@ -1053,7 +1054,7 @@ export default {
     closefloating2() {
       this.floatingflag2 = false;
     },
-    getAptDeals(aptCode) {
+    getAptDeals(aptCode, apt) {
       console.log("마커 클릭 이벤트 ");
       console.log(aptCode);
       http
@@ -1072,6 +1073,7 @@ export default {
           alert("데이터 로드 실패");
           console.log(error);
         });
+      this.curHouseInfo = apt;
       if (this.aptDeals.length > 0) {
         this.curAptCode = aptCode;
       }
@@ -1099,7 +1101,7 @@ export default {
 
         // 마커에 이벤트 등록
         kakao.maps.event.addListener(marker, "click", () => {
-          this.getAptDeals(marker.aptCode);
+          this.getAptDeals(marker.aptCode, apt);
         });
 
         this.apt_markers.push(marker);

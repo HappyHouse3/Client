@@ -1,5 +1,5 @@
 <template>
-  <b-container class="py-2">
+  <b-container class="py-2" style="display: block">
     <b-card
       border-variant="warning"
       header-bg-variant="warning"
@@ -88,6 +88,10 @@
 </template>
 <script>
 export default {
+  props: {
+    lat,
+    lng,
+  },
   data() {
     return {
       radius: 500,
@@ -104,7 +108,133 @@ export default {
         "controller",
       ],
       totalIdx: 0,
+      conveniences: [],
+      educations: [],
+      traffics: [],
+      medicals: [],
+      cafes: [],
+      cultures: [],
+      allCategory: [],
+      totalIdx: 0,
     };
   },
+  methods: {},
 };
+function getConv(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "CS2",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
+function getMart(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "MT1",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
+function getSchool(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "SC4",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
+function getPSchool(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "AC5",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
+function getMetro(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "SW8",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
+function getCulture(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "CT1",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
+function getCafe(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "CE7",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
+function getHospital(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "HP8",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
+function getDrugstore(payload) {
+  return axios.get(API_URL, {
+    headers: { Authorization: `KakaoAK ${API_KEY}` },
+    params: {
+      category_group_code: "PM9",
+      x: payload.x,
+      y: payload.y,
+      radius: payload.radius,
+      size: 5,
+      sort: "distance",
+    },
+  });
+}
 </script>
