@@ -583,7 +583,7 @@
                 <house-infra :curHouseInfo="curHouseInfo" />
               </b-tab>
               <b-tab title="리뷰" style="height: 100% !important">
-                <house-review :curAptCode="curAptCode" />
+                <house-review :curHouseInfo="curHouseInfo" />
               </b-tab>
             </b-tabs>
           </b-card>

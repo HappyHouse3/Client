@@ -100,9 +100,8 @@ export default {
     };
   },
   props: {
-    curAptCode: {
-      default: 0,
-      type: Number,
+    curHouseInfo: {
+      default: null,
     },
   },
   created() {
@@ -110,6 +109,7 @@ export default {
   },
   methods: {
     createReview() {
+      console.log(this.curHouseInfo);
       var con = document.getElementById("myRev");
       if (con.style.display == "none") {
         con.style.display = "block";
@@ -119,9 +119,15 @@ export default {
     },
     uploadReview(event) {
       event.preventDefault();
-      console.log(this.score);
+      console.log({
+        content: this.content,
+        title: this.title,
+        score: this.score,
+        userNo: tokenDecoder.decode(this.token).userNo,
+      });
+      console.log(this.curAptCode);
       http
-        .post(`/map/apt/${this.curAptCode}/review`, {
+        .post(`/map/apt/${this.curHouseInfo.aptCode}/review`, {
           content: this.content,
           title: this.title,
           score: this.score,
@@ -136,7 +142,7 @@ export default {
         })
         .then(() => {
           http
-            .get(`/map/apt/${this.curAptCode}/review`)
+            .get(`/map/apt/${this.curHouseInfo.aptCode}/review`)
             .then(({ data }) => {
               this.reviews = data;
             })
@@ -151,11 +157,11 @@ export default {
   },
   watch: {
     curAptCode: function () {
-      console.log(this.curAptCode);
+      console.log(this.curHouseInfo.userNo);
       if (this.curAptCode) {
         console.log("리뷰 불러오기");
         http
-          .get(`/map/apt/${this.curAptCode}/review`)
+          .get(`/map/apt/${this.curHouseInfo.aptCode}/review`)
           .then(({ data }) => {
             this.reviews = data;
           })
