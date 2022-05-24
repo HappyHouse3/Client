@@ -1118,7 +1118,11 @@ export default {
   height: 92% !important;
 }
 .nav-pills .nav-link.active {
-  background-color: rgb(201, 175, 255) !important;
+  background-color: rgb(89 149 138) !important;
+  color: rgb(255, 255, 255) !important;
+}
+.nav-link {
+  color: rgb(0, 69, 28) !important;
 }
 .info {
   font-size: 12px;
