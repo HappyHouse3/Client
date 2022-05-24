@@ -16,4 +16,18 @@
     <b-button href="#" variant="primary">Go somewhere</b-button>
   </b-card>
 </template>
-<script></script>
+<script>
+export default {
+  props: {
+    aptDeals: {
+      type: Array,
+    },
+  },
+  watch: {
+    aptDeals: function () {
+      console.log("거래내역 불러오기 완료");
+      console.log(this.aptDeals);
+    },
+  },
+};
+</script>

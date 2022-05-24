@@ -571,7 +571,7 @@
           <b-card no-body style="height: 100%; border-bottom: none">
             <b-tabs pills card style="height: 100%">
               <b-tab title="거래내역" active style="height: 100%">
-                <house-deal />
+                <house-deal :aptDeals="aptDeals" />
               </b-tab>
 
               <b-tab title="인프라" style="height: 100%">
