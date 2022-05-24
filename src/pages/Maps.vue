@@ -548,7 +548,9 @@
           display: none;
         "
       >
-        <h2>{{ aptDeals[0].aptName }}</h2>
+        <h2 v-if="aptDeals.length > 0" style="text-align: center">
+          {{ aptDeals[0].aptName }}
+        </h2>
         <button
           @click="closeAptList"
           style="position: fixed; right: 10px; height: 30px; width: 30px"
@@ -560,60 +562,15 @@
           <b-card no-body>
             <b-tabs pills card>
               <b-tab title="거래내역" active>
-                <b-card
-                  title="Card Title"
-                  img-src="https://picsum.photos/600/300/?image=25"
-                  img-alt="Image"
-                  img-top
-                  tag="article"
-                  style="max-width: 20rem"
-                  class="mb-2"
-                >
-                  <b-card-text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </b-card-text>
-
-                  <b-button href="#" variant="primary">Go somewhere</b-button>
-                </b-card></b-tab
-              >
+                <house-deal />
+              </b-tab>
 
               <b-tab title="인프라">
-                <b-card
-                  title="Card Title"
-                  img-src="https://picsum.photos/600/300/?image=25"
-                  img-alt="Image"
-                  img-top
-                  tag="article"
-                  style="max-width: 20rem"
-                  class="mb-2"
-                >
-                  <b-card-text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </b-card-text>
-
-                  <b-button href="#" variant="primary">Go somewhere</b-button>
-                </b-card></b-tab
-              >
+                <house-infra />
+              </b-tab>
               <b-tab title="리뷰">
-                <b-card
-                  title="Card Title"
-                  img-src="https://picsum.photos/600/300/?image=25"
-                  img-alt="Image"
-                  img-top
-                  tag="article"
-                  style="max-width: 20rem"
-                  class="mb-2"
-                >
-                  <b-card-text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </b-card-text>
-
-                  <b-button href="#" variant="primary">Go somewhere</b-button>
-                </b-card></b-tab
-              >
+                <house-review />
+              </b-tab>
             </b-tabs>
           </b-card>
         </div>
@@ -628,6 +585,10 @@
 <script>
 import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
 import http from "@/util/http-common";
+
+import HouseDeal from "./HouseInfo/HouseDeal.vue";
+import HouseReview from "./HouseInfo/HouseReview.vue";
+import HouseInfra from "./HouseInfo/HouseInfra.vue";
 
 const memberStore = "memberStore";
 
@@ -649,6 +610,11 @@ export default {
       aptList: [],
       aptDeals: [],
     };
+  },
+  components: {
+    HouseDeal,
+    HouseReview,
+    HouseInfra,
   },
   created() {
     http.get(`/map/sido`).then(({ data }) => {
