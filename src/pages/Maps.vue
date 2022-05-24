@@ -404,11 +404,13 @@
           ><img
             src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
             alt="확대"
+            style="box-sizing: content-box"
         /></span>
         <span @click="zoomOut"
           ><img
             src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
             alt="축소"
+            style="box-sizing: content-box"
         /></span>
       </div>
       <div
