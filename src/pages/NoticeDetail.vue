@@ -23,7 +23,10 @@
           </div>
 
           <div class="md-layout-item md-size-100 text-center">
-            <md-button class="md-raised md-success" style="margin-right: 10px"
+            <md-button
+              class="md-raised md-success"
+              style="margin-right: 10px"
+              v-if="isAdmin"
               >수정하기</md-button
             >
             <md-button
@@ -42,6 +45,7 @@
 <script>
 import http from "@/util/http-common";
 import { Viewer } from "@toast-ui/vue-editor";
+import roleProvier from "@/util/getRoleType";
 
 export default {
   components: {
@@ -78,6 +82,11 @@ export default {
   methods: {
     backList() {
       location.href = "./";
+    },
+  },
+  computed: {
+    isAdmin() {
+      return roleProvier.isAdmin();
     },
   },
 };
