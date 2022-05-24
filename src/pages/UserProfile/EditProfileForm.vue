@@ -29,7 +29,7 @@
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>비밀번호</label>
-              <md-input v-model="password" type="text"></md-input>
+              <md-input v-model="password" type="password"></md-input>
             </md-field>
           </div>
 
@@ -104,7 +104,7 @@
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>비밀번호</label>
-              <md-input v-model="password" type="text"></md-input>
+              <md-input v-model="password" type="password"></md-input>
             </md-field>
           </div>
 

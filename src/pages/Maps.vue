@@ -343,7 +343,7 @@
             cursor: pointer;
             background-color: transparent;
             border: none;
-            left: 22.5rem;
+            left: 22.7rem;
             padding-left: 1rem;
           "
         >
@@ -509,6 +509,8 @@
                   height: 40px;
                   padding: 0px;
                   margin-right: 5px;
+                  border: none;
+                  outline: none;
                 "
                 @click="naverOpen(item.searchKeyword)"
               >
@@ -523,10 +525,12 @@
                   height: 40px;
                   padding: 0px;
                   margin-left: 5px;
+                  border: none;
+                  outline: none;
                 "
                 @click="youtubeOpen(item.searchKeyword)"
               >
-                <img src="../assets/img/youtube.jpg" />
+                <img src="../assets/img/youtube.jpg" style="height: 100%" />
               </button>
             </div>
           </div>
