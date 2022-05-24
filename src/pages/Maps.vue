@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="map_wrap float-right" style="width: 100%; height: 850px">
+    <div class="map_wrap float-right" style="width: 100%; height: 863px">
       <div id="map" style="width: 100%; height: 100%"></div>
       <div class="">
         <button
