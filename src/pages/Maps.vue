@@ -429,21 +429,20 @@
           display: none;
         "
       >
-        <div
-          style="
-            border-bottom: solid 1px black;
-            display: block;
-            padding-top: 10px;
-            padding-left: 10px;
-          "
-        >
-          <h4 style="display: inline-block">우리동네 아파트</h4>
-          <button
-            @click="closeList"
-            style="float: right; height: 30px; width: 30px"
-          >
-            <b-icon icon="x-lg"></b-icon>
-          </button>
+        <div style="display: flow-root; border-bottom: solid 1px black">
+          <div style="float: left; margin: 5px 0 0 20px">
+            <h4 style="text-align: center; padding-top: 6px; font-weight: bold">
+              우리동네 아파트
+            </h4>
+          </div>
+          <div style="float: right">
+            <button
+              @click="closeList"
+              style="border: none; right: 10px; height: 30px; width: 30px"
+            >
+              <b-icon icon="x-lg"></b-icon>
+            </button>
+          </div>
         </div>
         <div
           style="
@@ -550,19 +549,24 @@
           display: none;
         "
       >
-        <h4
-          v-if="aptDeals.length > 0"
-          style="text-align: center; padding-top: 6px; font-weight: bold"
-        >
-          {{ aptDeals[0].aptName }}
-        </h4>
-        <button
-          @click="closeAptList"
-          style="position: fixed; right: 10px; height: 30px; width: 30px"
-        >
-          <b-icon icon="x-lg"></b-icon>
-        </button>
-
+        <div style="display: flow-root">
+          <div style="float: left; margin: 5px 0 0 20px">
+            <h4
+              v-if="aptDeals.length > 0"
+              style="text-align: center; padding-top: 6px; font-weight: bold"
+            >
+              {{ aptDeals[0].aptName }}
+            </h4>
+          </div>
+          <div style="float: right">
+            <button
+              @click="closeAptList"
+              style="border: none; right: 10px; height: 30px; width: 30px"
+            >
+              <b-icon icon="x-lg"></b-icon>
+            </button>
+          </div>
+        </div>
         <div style="height: 92%">
           <b-card no-body style="height: 100%; border-bottom: none">
             <b-tabs pills card style="height: 100%">

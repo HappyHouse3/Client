@@ -1,5 +1,5 @@
 <template>
-  <b-container style="height: 100%; align-items: center">
+  <b-container style="height: 100%; display: block; align-items: center">
     <b-container v-if="reviews.length == 0" class="p-2">
       <b-container class="p-5">
         <h3><b-icon-emoji-expressionless></b-icon-emoji-expressionless></h3>
@@ -15,9 +15,9 @@
     >
       <b-card-text class="m-0"
         ><span class="font-size-15 color-dimgrey"
-          >만족도 <strong>4.5</strong>
+          >만족도 <strong>{{ review.score }}</strong>
           <b-form-rating
-            v-model="review.star"
+            v-model="review.score"
             readonly
             no-border
             variant="warning"
