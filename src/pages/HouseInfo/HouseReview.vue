@@ -125,7 +125,7 @@ export default {
         score: this.score,
         userNo: tokenDecoder.decode(this.token).userNo,
       });
-      console.log(this.curAptCode);
+
       http
         .post(`/map/apt/${this.curHouseInfo.aptCode}/review`, {
           content: this.content,

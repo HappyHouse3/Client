@@ -2,7 +2,11 @@
   <div>
     <div v-if="noticeList != null">
       <md-table v-model="noticeList" :table-header-color="tableHeaderColor">
-        <md-table-row slot="md-table-row" slot-scope="{ item }">
+        <md-table-row
+          slot="md-table-row"
+          slot-scope="{ item }"
+          style="text-align: center"
+        >
           <md-table-cell md-label="순번">{{ item.id }}</md-table-cell>
           <md-table-cell md-label="제목"
             ><router-link
@@ -13,7 +17,11 @@
           <md-table-cell md-label="작성자">{{
             item.userNickName
           }}</md-table-cell>
-          <md-table-cell md-label="작성일">{{ item.regTime }}</md-table-cell>
+          <md-table-cell
+            md-label="작성일"
+            style="display: flex; justify-content: center"
+            >{{ item.regTime }}</md-table-cell
+          >
         </md-table-row>
       </md-table>
       <div class="md-layout-item md-size-100 text-right">
@@ -57,8 +65,13 @@ export default {
   },
   methods: {
     upload() {
-      location.href = "./notice/upload";
+      location.href = "../notice/upload";
     },
   },
 };
 </script>
+<style>
+.md-table-head-container {
+  text-align: center;
+}
+</style>

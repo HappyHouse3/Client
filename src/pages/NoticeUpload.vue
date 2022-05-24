@@ -17,6 +17,12 @@
                 required
                 placeholder="제목을 입력하세요"
                 v-model="title"
+                style="
+                  margin-bottom: 20px;
+                  width: 800px;
+                  height: 50px;
+                  border: none;
+                "
               />
               <!--
 
@@ -29,16 +35,17 @@
               ></textarea>-->
 
               <Editor ref="toastuiEditor" />
-
-              <button
-                type="submit"
-                variant="primary"
-                class="m-1"
-                @click="onSubmit"
-              >
-                글작성
-              </button>
-              <button type="reset" variant="danger" class="m-1">취소</button>
+              <div class="md-layout-item md-size-100 text-center">
+                <md-button
+                  class="md-raised md-success"
+                  @click="onSubmit"
+                  style="margin-right: 10px"
+                  >글작성</md-button
+                >
+                <md-button class="md-raised md-success" @click="backList"
+                  >취소</md-button
+                >
+              </div>
             </form>
           </md-card-content>
         </md-card>
@@ -84,6 +91,9 @@ export default {
       else {
         this.uploadNotice();
       }
+    },
+    backList() {
+      location.href = "../notice";
     },
     uploadNotice() {
       http
