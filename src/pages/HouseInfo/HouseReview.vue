@@ -1,5 +1,5 @@
 <template>
-  <b-container style="height: 100%">
+  <b-container style="height: 100%; align-items: center">
     <b-container v-if="reviews.length == 0" class="p-2">
       <b-container class="p-5">
         <h3><b-icon-emoji-expressionless></b-icon-emoji-expressionless></h3>

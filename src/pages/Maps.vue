@@ -550,9 +550,12 @@
           display: none;
         "
       >
-        <h2 v-if="aptDeals.length > 0" style="text-align: center">
+        <h4
+          v-if="aptDeals.length > 0"
+          style="text-align: center; padding-top: 6px; font-weight: bold"
+        >
           {{ aptDeals[0].aptName }}
-        </h2>
+        </h4>
         <button
           @click="closeAptList"
           style="position: fixed; right: 10px; height: 30px; width: 30px"
@@ -560,17 +563,17 @@
           <b-icon icon="x-lg"></b-icon>
         </button>
 
-        <div>
-          <b-card no-body>
-            <b-tabs pills card>
-              <b-tab title="거래내역" active>
+        <div style="height: 92%">
+          <b-card no-body style="height: 100%; border-bottom: none">
+            <b-tabs pills card style="height: 100%">
+              <b-tab title="거래내역" active style="height: 100%">
                 <house-deal />
               </b-tab>
 
-              <b-tab title="인프라">
+              <b-tab title="인프라" style="height: 100%">
                 <house-infra />
               </b-tab>
-              <b-tab title="리뷰">
+              <b-tab title="리뷰" style="height: 100% !important">
                 <house-review :curAptCode="curAptCode" />
               </b-tab>
             </b-tabs>
@@ -1232,6 +1235,9 @@ export default {
 </script>
 
 <style>
+.tab-content {
+  height: 92% !important;
+}
 .nav-pills .nav-link.active {
   background-color: rgb(201, 175, 255) !important;
 }

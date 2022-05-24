@@ -5,7 +5,7 @@
     img-alt="Image"
     img-top
     tag="article"
-    style="max-width: 20rem"
+    style="max-width: 20rem; height: 92%"
     class="mb-2"
   >
     <b-card-text>
