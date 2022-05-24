@@ -8,8 +8,8 @@
           @click="openfloating"
           style="
             position: absolute;
-            left: 10px;
-            top: 120px;
+            left: 550px;
+            top: 20px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -28,8 +28,8 @@
           @click="closefloating"
           style="
             position: absolute;
-            left: 10px;
-            top: 120px;
+            left: 550px;
+            top: 20px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -48,8 +48,8 @@
           @click="subwaymarker"
           style="
             position: absolute;
-            left: 10px;
-            top: 170px;
+            left: 550px;
+            top: 70px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -68,8 +68,8 @@
           @click="bicyclemarker"
           style="
             position: absolute;
-            left: 10px;
-            top: 220px;
+            left: 550px;
+            top: 120px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -88,8 +88,8 @@
           @click="busmarker"
           style="
             position: absolute;
-            left: 10px;
-            top: 270px;
+            left: 550px;
+            top: 170px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -110,8 +110,8 @@
           v-if="!floatingflag2"
           style="
             position: absolute;
-            left: 60px;
-            top: 120px;
+            left: 600px;
+            top: 20px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -127,8 +127,8 @@
           @click="closefloating2"
           style="
             position: absolute;
-            left: 60px;
-            top: 120px;
+            left: 600px;
+            top: 20px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -147,8 +147,8 @@
           @click="hospitalmarker"
           style="
             position: absolute;
-            left: 60px;
-            top: 170px;
+            left: 600px;
+            top: 70px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -164,8 +164,8 @@
           @click="schoolmarker"
           style="
             position: absolute;
-            left: 60px;
-            top: 220px;
+            left: 600px;
+            top: 120px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -184,8 +184,8 @@
           @click="cafemarker"
           style="
             position: absolute;
-            left: 60px;
-            top: 270px;
+            left: 600px;
+            top: 170px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -201,8 +201,8 @@
           @click="convenientmarker"
           style="
             position: absolute;
-            left: 60px;
-            top: 320px;
+            left: 600px;
+            top: 220px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -221,8 +221,8 @@
           @click="kidmarker"
           style="
             position: absolute;
-            left: 60px;
-            top: 370px;
+            left: 600px;
+            top: 270px;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
@@ -243,6 +243,7 @@
             cursor: pointer;
             background-color: transparent;
             border: none;
+            width: 172px;
             left: 1.25rem;
           "
         >
@@ -268,6 +269,7 @@
               background-size: 1.5em 1.5em;
               padding-left: 0.75rem;
               padding-right: 1.5rem;
+              width: 172px;
             "
           >
             <option>시/도</option>
@@ -292,8 +294,9 @@
             cursor: pointer;
             background-color: transparent;
             border: none;
-            left: 11rem;
+            left: 12rem;
             padding-left: 0.5rem;
+            width: 172px;
           "
         >
           <select
@@ -309,10 +312,7 @@
               --tw-text-opacity: 1;
               color: rgba(75, 85, 99, var(--tw-text-opacity));
               height: 2.5rem;
-              background-image: url(
-                data:image/svg + xml,
-                %3csvgxmlns='http://www.w3.org/2000/svg'fill='none'viewBox='0 0 20 20'%3e%3cpathstroke='%236b7280'stroke-linecap='round'stroke-linejoin='round'stroke-width='1.5'd='M6 8l4 4 4-4'/%3e%3c/svg%3e
-              );
+              width: 172px;
               background-position: right 0.5rem center;
               background-repeat: no-repeat;
               background-size: 1.5em 1.5em;
@@ -336,15 +336,15 @@
           class="inline-flex absolute top-5 left-40 z-20 ml-40 pl-5"
           style="
             position: absolute;
-            left: 60px;
+            width: 178px;
             top: 1.25rem;
             z-index: 40;
             border-radius: 0.25rem;
             cursor: pointer;
             background-color: transparent;
             border: none;
-            left: 18rem;
-            padding-left: 2.25rem;
+            left: 22.5rem;
+            padding-left: 1rem;
           "
         >
           <select
@@ -364,6 +364,7 @@
                 data:image/svg + xml,
                 %3csvgxmlns='http://www.w3.org/2000/svg'fill='none'viewBox='0 0 20 20'%3e%3cpathstroke='%236b7280'stroke-linecap='round'stroke-linejoin='round'stroke-width='1.5'd='M6 8l4 4 4-4'/%3e%3c/svg%3e
               );
+              width: 178px;
               background-position: right 0.5rem center;
               background-repeat: no-repeat;
               background-size: 1.5em 1.5em;
