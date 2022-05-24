@@ -16,8 +16,8 @@ import MaterialDashboard from "./material-dashboard";
 import Chartist from "chartist";
 // import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
-// import "bootstrap/dist/css/bootstrap.css";
-// import "bootstrap-vue/dist/bootstrap-vue.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 // configure router
 const router = new VueRouter({
@@ -34,6 +34,10 @@ Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue);
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin);
 // Vue.use(store);
 
 /* eslint-disable no-new */

@@ -427,13 +427,20 @@
           display: none;
         "
       >
-        <div style="border-bottom: solid 1px black; display: block">
-          <h3 style="display: inline-block">우리동네 아파트</h3>
+        <div
+          style="
+            border-bottom: solid 1px black;
+            display: block;
+            padding-top: 10px;
+            padding-left: 10px;
+          "
+        >
+          <h4 style="display: inline-block">우리동네 아파트</h4>
           <button
             @click="closeList"
             style="float: right; height: 30px; width: 30px"
           >
-            <b-icon icon="search"></b-icon>
+            <b-icon icon="x-lg"></b-icon>
           </button>
         </div>
         <div
@@ -467,7 +474,7 @@
             >
               {{ item.roadAddress }}
             </p>
-            <h4
+            <h5
               style="
                 color: white;
                 text-align: center;
@@ -477,7 +484,7 @@
               "
             >
               {{ item.aptName }}
-            </h4>
+            </h5>
 
             <p
               style="
@@ -490,7 +497,7 @@
             >
               거래내역보기
             </p>
-            <div style="display: flex">
+            <div style="display: flex; justify-content: center">
               <button
                 type="button"
                 class="btm_image"
@@ -521,6 +528,94 @@
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div
+        class="aptinfo"
+        id="aptDIV"
+        style="
+          position: fixed;
+          top: 230px;
+          right: 20px;
+          margin-left: 20px;
+          width: 400px;
+          height: 680px;
+          background-color: white;
+          z-index: 50;
+          border-radius: 0.5rem;
+          overflow-y: scroll;
+          display: none;
+        "
+      >
+        <h2>{{ aptDeals[0].aptName }}</h2>
+        <button
+          @click="closeAptList"
+          style="position: fixed; right: 10px; height: 30px; width: 30px"
+        >
+          <b-icon icon="x-lg"></b-icon>
+        </button>
+
+        <div>
+          <b-card no-body>
+            <b-tabs pills card>
+              <b-tab title="거래내역" active>
+                <b-card
+                  title="Card Title"
+                  img-src="https://picsum.photos/600/300/?image=25"
+                  img-alt="Image"
+                  img-top
+                  tag="article"
+                  style="max-width: 20rem"
+                  class="mb-2"
+                >
+                  <b-card-text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </b-card-text>
+
+                  <b-button href="#" variant="primary">Go somewhere</b-button>
+                </b-card></b-tab
+              >
+
+              <b-tab title="인프라">
+                <b-card
+                  title="Card Title"
+                  img-src="https://picsum.photos/600/300/?image=25"
+                  img-alt="Image"
+                  img-top
+                  tag="article"
+                  style="max-width: 20rem"
+                  class="mb-2"
+                >
+                  <b-card-text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </b-card-text>
+
+                  <b-button href="#" variant="primary">Go somewhere</b-button>
+                </b-card></b-tab
+              >
+              <b-tab title="리뷰">
+                <b-card
+                  title="Card Title"
+                  img-src="https://picsum.photos/600/300/?image=25"
+                  img-alt="Image"
+                  img-top
+                  tag="article"
+                  style="max-width: 20rem"
+                  class="mb-2"
+                >
+                  <b-card-text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </b-card-text>
+
+                  <b-button href="#" variant="primary">Go somewhere</b-button>
+                </b-card></b-tab
+              >
+            </b-tabs>
+          </b-card>
         </div>
       </div>
     </div>
@@ -717,6 +812,12 @@ export default {
     },
     closeList() {
       var con = document.getElementById("myDIV");
+      if (con.style.display == "block") {
+        con.style.display = "none";
+      }
+    },
+    closeAptList() {
+      var con = document.getElementById("aptDIV");
       if (con.style.display == "block") {
         con.style.display = "none";
       }
@@ -1105,6 +1206,13 @@ export default {
         .get(`/map/apt/${aptCode}/deal`)
         .then(({ data }) => {
           this.aptDeals = data;
+          console.log(this.aptDeals);
+        })
+        .then(() => {
+          var con = document.getElementById("aptDIV");
+          if (con.style.display == "none") {
+            con.style.display = "block";
+          }
         })
         .catch((error) => {
           alert("데이터 로드 실패");
@@ -1152,6 +1260,9 @@ export default {
 </script>
 
 <style>
+.nav-pills .nav-link.active {
+  background-color: rgb(201, 175, 255) !important;
+}
 .info {
   font-size: 12px;
   padding: 5px;
