@@ -494,7 +494,7 @@
                 cursor: pointer;
                 line-height: 50%;
               "
-              @click="getAptDeals(item.aptCode)"
+              @click="getAptDeals(item.aptCode, item)"
             >
               거래내역보기
             </p>
@@ -1055,13 +1055,10 @@ export default {
       this.floatingflag2 = false;
     },
     getAptDeals(aptCode, apt) {
-      console.log("마커 클릭 이벤트 ");
-      console.log(aptCode);
       http
         .get(`/map/apt/${aptCode}/deal`)
         .then(({ data }) => {
           this.aptDeals = data;
-          console.log(this.aptDeals);
         })
         .then(() => {
           var con = document.getElementById("aptDIV");
@@ -1073,11 +1070,10 @@ export default {
           alert("데이터 로드 실패");
           console.log(error);
         });
-      this.curHouseInfo = apt;
       if (this.aptDeals.length > 0) {
         this.curAptCode = aptCode;
       }
-      console.log("선택된 아파트 코드" + this.curAptCode);
+      this.curHouseInfo = apt;
     },
   },
   watch: {
