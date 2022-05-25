@@ -203,7 +203,14 @@
       >
         <div style="display: flow-root; border-bottom: solid 1px black">
           <div style="float: left; margin: 5px 0 0 20px">
-            <h4 style="text-align: center; padding-top: 6px; font-weight: bold">
+            <h4
+              style="
+                font-family: Y_Spotlight;
+                text-align: center;
+                padding-top: 6px;
+                font-weight: bold;
+              "
+            >
               우리동네 아파트
             </h4>
           </div>
@@ -215,6 +222,9 @@
               <b-icon icon="x-lg"></b-icon>
             </button>
           </div>
+        </div>
+        <div v-if="aptList.length == 0">
+          <img src="@/assets/img/noapt.jpg" />
         </div>
         <div
           style="
@@ -254,6 +264,7 @@
                 font-weight: bold;
                 margin: 0px;
                 line-height: 80%;
+                font-family: Y_Spotlight;
               "
             >
               {{ item.aptName }}
