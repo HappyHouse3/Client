@@ -78,90 +78,65 @@
               <div
                 v-for="(item, index) in qnaList"
                 :key="index"
-                style="
-                  margin-left: 20px;
-                  width: 265px;
-                  height: auto;
-                  background-color: white;
-                  z-index: 50;
-                  border: 1px solid black;
-                  margin: 15px;
-                  display: block;
-                  justify-content: center;
-                "
+                class="md-layout-item md-medium-size-50 md-xsmall-size-100"
               >
-                <p
-                  style="
-                    color: #ffcd4a;
-                    text-align: center;
-                    margin-top: 15px;
-                    font-weight: bold;
-                    font-size: 1rem;
-                  "
-                >
-                  {{ item.title }}
-                </p>
-                <p
-                  style="
-                    color: black;
-                    text-align: right;
-                    font-weight: bold;
-                    font-size: 0.44rem;
-                    margin-right: 10px;
-                  "
-                >
-                  {{ item.userNickName }} ({{ item.regTime }})
-                </p>
-                <div
-                  style="
-                    color: black;
-                    text-align: center;
-                    font-weight: bold;
-                    margin: 0px;
-                    margin-top: 10px;
-                    line-height: 80%;
-                    height: 100px;
-                  "
-                >
-                  {{ item.content }}
-                </div>
-                <hr style="margin: 0.5rem 0" />
-                <p
-                  style="font-size: 1rem; text-align: right; margin-right: 10px"
-                >
-                  💬 {{ item.replyList.length }}
-                </p>
-                <hr style="margin: 0" />
-                <div style="background-color: rgb(248 241 246 / 50%)">
-                  <div
-                    v-for="(item, index) in item.replyList"
-                    :key="index"
-                    style="
-                      padding-left: 10px;
-                      margin-top: 5px;
-                      margin-bottom: 5px;
-                    "
-                  >
-                    <strong>{{ item.userNickName }}</strong> ({{
-                      item.regTime
-                    }}) <br />{{ item.content }}
-                  </div>
-                  <div
-                    style="
-                      display: flex;
-                      margin-top: 20px;
-                      margin-bottom: 20px;
-                      margin-left: 10px;
-                    "
-                  >
-                    <input v-model="replycontent" /><md-button
-                      class="md-raised md-success"
-                      style="min-width: 40px"
-                      @click="replay(item.id)"
-                      >작성</md-button
+                <stats-card data-background-color="green">
+                  <template slot="content">
+                    <p
+                      style="
+                        color: #ffcd4a;
+                        text-align: center;
+                        margin-top: 15px;
+                        font-weight: bold;
+                        font-size: 1rem;
+                      "
                     >
-                  </div>
-                </div>
+                      {{ item.title }}
+                    </p>
+                    <p class="category">
+                      {{ item.userNickName }} ({{ item.regTime }})
+                    </p>
+                    <h3 class="title">{{ item.content }}</h3>
+                  </template>
+
+                  <template slot="footer">
+                    <div class="stats" style="width: 100%">
+                      <md-icon>date_range</md-icon>
+                      💬 {{ item.replyList.length }}
+
+                      <div style="background-color: rgb(248 241 246 / 50%)">
+                        <div
+                          v-for="(item, index) in item.replyList"
+                          :key="index"
+                          style="
+                            padding-left: 10px;
+                            margin-top: 5px;
+                            margin-bottom: 5px;
+                          "
+                        >
+                          <strong>{{ item.userNickName }}</strong> ({{
+                            item.regTime
+                          }}) <br />{{ item.content }}
+                        </div>
+                        <div
+                          style="
+                            display: flex;
+                            margin-top: 20px;
+                            margin-bottom: 20px;
+                            margin-left: 10px;
+                          "
+                        >
+                          <input v-model="replycontent" /><md-button
+                            class="md-raised md-success"
+                            style="min-width: 40px"
+                            @click="replay(item.id)"
+                            >작성</md-button
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </stats-card>
               </div>
             </div>
           </md-card-content>
@@ -176,12 +151,16 @@ import http from "@/util/http-common";
 import tokenDecoder from "@/util/token-decoder";
 
 import { ninvoke } from "q";
+import { StatsCard } from "@/components";
 export default {
   props: {
     dataBackgroundColor: {
       type: String,
       default: "",
     },
+  },
+  components: {
+    StatsCard,
   },
   data() {
     return {
