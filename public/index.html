@@ -1,21 +1,3 @@
-<!--
-
-=========================================================
-* Vue Material Dashboard - v1.4.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vue-material-dashboard
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/vue-material-dashboard/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -50,5 +32,49 @@
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <!-- Channel Plugin Scripts -->
+    <script>
+      (function () {
+        var w = window;
+        if (w.ChannelIO) {
+          return (window.console.error || window.console.log || function () {})(
+            "ChannelIO script included twice."
+          );
+        }
+        var ch = function () {
+          ch.c(arguments);
+        };
+        ch.q = [];
+        ch.c = function (args) {
+          ch.q.push(args);
+        };
+        w.ChannelIO = ch;
+        function l() {
+          if (w.ChannelIOInitialized) {
+            return;
+          }
+          w.ChannelIOInitialized = true;
+          var s = document.createElement("script");
+          s.type = "text/javascript";
+          s.async = true;
+          s.src = "https://cdn.channel.io/plugin/ch-plugin-web.js";
+          s.charset = "UTF-8";
+          var x = document.getElementsByTagName("script")[0];
+          x.parentNode.insertBefore(s, x);
+        }
+        if (document.readyState === "complete") {
+          l();
+        } else if (window.attachEvent) {
+          window.attachEvent("onload", l);
+        } else {
+          window.addEventListener("DOMContentLoaded", l, false);
+          window.addEventListener("load", l, false);
+        }
+      })();
+      ChannelIO("boot", {
+        pluginKey: "a84936bb-c813-4400-85af-42efb5555388",
+      });
+    </script>
+    <!-- End Channel Plugin -->
   </body>
 </html>
