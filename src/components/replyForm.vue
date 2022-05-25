@@ -28,10 +28,6 @@
 import http from "@/util/http-common";
 import jwt_decode from "jwt-decode";
 
-let token = sessionStorage.getItem("access-token");
-let loginUserInfo = jwt_decode(token);
-let userNo = loginUserInfo.userNo;
-
 export default {
   props: {
     boardId: Number,
@@ -39,7 +35,12 @@ export default {
   data() {
     return {
       replycontent: "",
+      userNo: null,
     };
+  },
+  created() {
+    console.log(jwt_decode(sessionStorage.getItem("access-token"))).userNo;
+    this.userNo = jwt_decode(sessionStorage.getItem("access-token")).userNo;
   },
   methods: {
     addReply() {

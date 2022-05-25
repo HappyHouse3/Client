@@ -397,6 +397,7 @@ export default {
       curAptCode: null,
       curHouseInfo: null,
       infraMarkers: [],
+      overlay: null,
     };
   },
   components: {
@@ -743,7 +744,7 @@ export default {
     closefloating2() {
       this.floatingflag2 = false;
     },
-    getAptDeals(aptCode, apt) {
+    getAptDeals(aptCode, apt, marker) {
       http
         .get(`/map/apt/${aptCode}/deal`)
         .then(({ data }) => {
@@ -762,6 +763,37 @@ export default {
       if (this.aptDeals.length > 0) {
         this.curAptCode = aptCode;
       }
+
+      // 커스텀 오버레이
+      let content = `<div class="wrap">
+            <div class="info">
+                <div class="title">
+                    ${apt.aptName}
+                </div>
+                <div class="body"> +
+                    <div class="desc"> +
+                        <div class="ellipsis">${apt.searchKeyword}</div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+      let ol = new kakao.maps.CustomOverlay({
+        content: content,
+        map: this.map,
+        position: marker.getPosition(),
+      });
+
+      if (this.overlay) {
+        this.overlay.setMap(null);
+      }
+
+      this.overlay = ol;
+
+      console.log(this.overlay);
+
+      this.overlay.setMap(this.map);
+
       this.curHouseInfo = apt;
       this.map.setLevel(4);
       this.map.setCenter(new kakao.maps.LatLng(apt.lat, apt.lng));
@@ -815,11 +847,13 @@ export default {
 
         // 마커에 이벤트 등록
         kakao.maps.event.addListener(marker, "click", () => {
-          this.getAptDeals(marker.aptCode, apt);
+          this.getAptDeals(marker.aptCode, apt, marker);
         });
 
         this.apt_markers.push(marker);
         marker.setMap(this.map);
+        console.log("마커 포지션");
+        console.log(marker.getPosition());
       });
     },
   },
