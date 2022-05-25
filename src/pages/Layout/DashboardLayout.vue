@@ -82,3 +82,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.jm-font {
+  font-family: "Hanna", sans-serif;
+}
+</style>

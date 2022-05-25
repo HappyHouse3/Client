@@ -7,11 +7,20 @@
       margin-left: 10px;
     "
   >
-    <input v-model="replycontent" style="width: 220px" /><md-button
-      class="md-raised md-success"
-      style="min-width: 20px !important; width: 60px; margin-left: 20px"
+    <input v-model="replycontent" style="width: 220px" />
+    <b-button
+      size="sm"
+      style="
+        border: none;
+        background-color: #e4e4e4;
+        color: black;
+        margin: auto;
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      "
       @click="addReply"
-      >작성</md-button
+      >작성</b-button
     >
   </div>
 </template>

@@ -70,8 +70,13 @@ export default {
   },
 };
 </script>
+
 <style>
 .md-table-head-container {
   text-align: center;
+}
+
+.md-table-head-label {
+  padding: 0px 32px !important;
 }
 </style>

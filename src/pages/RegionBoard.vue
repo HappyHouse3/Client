@@ -6,8 +6,8 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">지역별 게시판</h4>
-            <p class="category">이곳은 지역별 게시판입니다.</p>
+            <h4 class="title jm-font">지역별 게시판</h4>
+            <p class="category">이곳은 {}게시판입니다.</p>
           </md-card-header>
           <md-card-content>
             <region-table table-header-color="green"></region-table>

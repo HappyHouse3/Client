@@ -10,10 +10,7 @@
           <md-card-content>
             <div id="typography">
               <div class="md-layout-item md-size-100 text-center">
-                <md-button
-                  class="md-raised md-success"
-                  @click="upload"
-                  style="padding-left: 10px"
+                <md-button class="md-raised md-success" @click="upload"
                   >글쓰기</md-button
                 >
               </div>
@@ -277,8 +274,5 @@ export default {
 <style>
 .md-card-stats .md-card-header {
   display: none !important;
-}
-.md-button-content {
-  margin-left: -13px;
 }
 </style>

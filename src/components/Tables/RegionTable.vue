@@ -1,88 +1,44 @@
 <template>
   <div>
     <div v-if="boardList != null">
-      <div class="md-layout-item md-size-100 text-right">
-        <md-button class="md-raised md-success" @click="upload"
-          >글쓰기</md-button
-        >
-      </div>
+      <img
+        src="../../assets/img/upload.jpg"
+        style="width: 50px; height: 50px; cursor: pointer; float: right"
+        @click="upload"
+      />
+
       <div
         id="QnAArea"
+        class="jm-font"
         style="
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(100%, auto));
+          padding: 10px 100px;
+          grid-template-columns: repeat(auto-fill, minmax(33%, auto));
         "
       >
         <div
           v-for="(item, index) in boardList"
           :key="index"
-          style="
-            margin-left: 20px;
-            width: 90%;
-            height: auto;
-            background-color: white;
-            z-index: 50;
-            border: 1px solid black;
-            margin: 15px;
-            display: block;
-            justify-content: center;
-          "
+          style="width: 400px; margin: 20px 5px"
         >
-          <div
-            style="
-              float: left;
-              width: 50%;
-              height: 500px;
-              display: table-cell;
-              position: relative;
-              vertical-align: middle;
-            "
-          >
-            <Viewer
-              v-if="item != null"
-              :initialValue="item.img"
+          <b-card-group columns>
+            <b-card
+              :title="item.title"
               style="
-                position: absolute;
-                top: 50%;
-                transform: translate(0, -50%);
-              "
-            />
-          </div>
-          <div style="float: right; width: 50%; height: 500px">
-            <div
-              style="
-                margin: 50px 50px 0px 50px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid black;
-                text-align: left;
-                font-weight: bold;
-                font-size: 1.5rem;
-              "
-            >
-              {{ item.title }}
-            </div>
-            <div
-              style="
-                margin: 0px 50px 50px 50px;
-                padding-bottom: 20px;
-                text-align: right;
+                background-color: #c6b39a;
+                border: none;
+                border-radius: 20px;
               "
             >
               작성자 : {{ item.userNickName }} <br />
               작성일 : {{ item.regTime }}
-            </div>
 
-            <div
-              style="
-                margin: 50px 50px 0px 50px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid black;
-                text-align: center;
-              "
-            >
-              {{ item.content }}
-            </div>
-          </div>
+              <Viewer v-if="item != null" :initialValue="item.img" />
+              <b-card-text>
+                {{ item.content }}
+              </b-card-text>
+            </b-card>
+          </b-card-group>
         </div>
       </div>
     </div>
