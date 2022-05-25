@@ -38,23 +38,13 @@
               <label>거주 지역</label>
 
               <select v-model="city" style="margin: 50px 0px 20px 0px">
-                <option>서울특별시</option>
-                <option>부산광역시</option>
-                <option>대구광역시</option>
-                <option>인천광역시</option>
-                <option>광주광역시</option>
-                <option>대전광역시</option>
-                <option>울산광역시</option>
-                <option>세종특별자치시</option>
-                <option>경기도</option>
-                <option>강원도</option>
-                <option>충청북도</option>
-                <option>충청남도</option>
-                <option>전라북도</option>
-                <option>전라남도</option>
-                <option>경상북도</option>
-                <option>경상남도</option>
-                <option>제주특별자치도</option>
+                <option
+                  v-for="(item, idx) in cities"
+                  :value="item.sidoCode"
+                  :key="idx"
+                >
+                  {{ item.sidoName }}
+                </option>
               </select>
             </md-field>
           </div>
@@ -246,7 +236,7 @@ export default {
           nickName: this.nickName,
           email: this.email,
           password: this.password,
-          sidoName: this.city,
+          sidoCode: this.city,
         })
         .then(({ data }) => {
           sessionStorage.setItem("access-token", data.token);
