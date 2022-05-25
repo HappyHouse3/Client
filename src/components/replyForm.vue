@@ -39,7 +39,6 @@ export default {
     };
   },
   created() {
-    console.log(jwt_decode(sessionStorage.getItem("access-token"))).userNo;
     this.userNo = jwt_decode(sessionStorage.getItem("access-token")).userNo;
   },
   methods: {
@@ -47,7 +46,7 @@ export default {
       http
         .post(`/qna/${this.boardId}/reply`, {
           content: this.replycontent,
-          userNo: userNo,
+          userNo: this.userNo,
         })
         .then((response) => {
           console.log(response.data);
