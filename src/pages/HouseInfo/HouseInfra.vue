@@ -188,6 +188,7 @@ export default {
       }, 0);
       this.avgScore = Math.ceil((totalScore / 6) * 10) / 10;
       this.sortCategorys();
+      this.makeMarker();
       this.$forceUpdate();
     },
     sortCategorys() {
@@ -351,10 +352,9 @@ export default {
       this.allVisible = !this.allVisible;
     },
     makeMarker() {
+      console.log("메이크 마커 메서드 호출");
       let imageSize = new kakao.maps.Size(27, 28);
       let imageOption = {
-        spriteSize: new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
-        spriteOrigin: new kakao.maps.Point(46, order * 36), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
         offset: new kakao.maps.Point(11, 28), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
       };
 
@@ -476,6 +476,7 @@ export default {
         tempMarkers.push(marker);
       });
 
+      console.log("sendMarker 호출전");
       this.$emit("sendMarker", tempMarkers);
     },
   },
