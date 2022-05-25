@@ -10,61 +10,65 @@
           <md-card-content>
             <div id="typography">
               <div class="md-layout-item md-size-100 text-center">
-                <md-button class="md-raised md-success" @click="upload"
+                <md-button
+                  class="md-raised md-success"
+                  @click="upload"
+                  style="padding-left: 10px"
                   >글쓰기</md-button
                 >
               </div>
 
               <div
                 id="mTxtArea"
-                style="
-                  margin-left: 20px;
-                  width: 265px;
-                  height: 265px;
-                  background-color: white;
-                  z-index: 50;
-                  border: 1px solid black;
-                  margin: 15px;
-                  display: none;
-                  justify-content: center;
-                "
+                class="md-layout-item md-medium-size-50 md-xsmall-size-100"
+                style="display: none"
               >
-                <input
-                  placeholder="제목을 작성하세요"
-                  v-model="title"
-                  style="
-                    margin-top: 10px;
-                    margin-left: 10px;
+                <stats-card data-background-color="green">
+                  <template slot="content">
+                    <div style="text-align: center">
+                      <input
+                        placeholder="제목을 작성하세요"
+                        v-model="title"
+                        style="
+                          margin-top: 10px;
+                          margin-left: 10px;
+                          border: none;
+                          text-align: center;
+                        "
+                      />
+                    </div>
+                  </template>
 
-                    border: none;
-                  "
-                />
-
-                <textarea
-                  v-model="content"
-                  placeholder="내용을 작성하세요"
-                  style="
-                    width: 90%;
-                    height: 150px;
-                    margin-top: 10px;
-                    margin-left: 10px;
-                    border: none;
-                  "
-                />
-                <b-button
-                  size="sm"
-                  style="
-                    border: none;
-                    background-color: #e4e4e4;
-                    color: black;
-                    margin: auto;
-                    display: block;
-                    margin-bottom: 10px;
-                    margin-top: 10px;
-                  "
-                  @click="uploadReview"
-                  >작성</b-button
-                >
+                  <template slot="footer"
+                    ><div style="display: block !important; width: 100%">
+                      <textarea
+                        v-model="content"
+                        placeholder="내용을 작성하세요"
+                        style="
+                          width: 100%;
+                          height: 150px;
+                          margin-top: 10px;
+                          margin-left: 10px;
+                          border: none;
+                        "
+                      />
+                      <b-button
+                        size="sm"
+                        style="
+                          border: none;
+                          background-color: #e4e4e4;
+                          color: black;
+                          margin: auto;
+                          display: block;
+                          margin-bottom: 10px;
+                          margin-top: 10px;
+                        "
+                        @click="uploadReview"
+                        >작성</b-button
+                      >
+                    </div>
+                  </template>
+                </stats-card>
               </div>
             </div>
 
@@ -96,15 +100,27 @@
                     <p class="category">
                       {{ item.userNickName }} ({{ item.regTime }})
                     </p>
-                    <h3 class="title">{{ item.content }}</h3>
+                    <h4
+                      class="title"
+                      style="margin-top: 20px; text-align: left"
+                    >
+                      {{ item.content }}
+                    </h4>
                   </template>
 
                   <template slot="footer">
                     <div class="stats" style="width: 100%">
-                      <md-icon>date_range</md-icon>
-                      💬 {{ item.replyList.length }}
+                      <div style="width: 100%; text-align: right">
+                        💬 {{ item.replyList.length }}
+                      </div>
 
-                      <div style="background-color: rgb(248 241 246 / 50%)">
+                      <div
+                        style="
+                          background-color: rgb(248 241 246 / 50%);
+                          width: 100%;
+                          display: grid;
+                        "
+                      >
                         <div
                           v-for="(item, index) in item.replyList"
                           :key="index"
@@ -112,11 +128,13 @@
                             padding-left: 10px;
                             margin-top: 5px;
                             margin-bottom: 5px;
+                            width: 100%;
                           "
                         >
                           <strong>{{ item.userNickName }}</strong> ({{
                             item.regTime
-                          }}) <br />{{ item.content }}
+                          }}) <br />
+                          {{ item.content }}
                         </div>
                         <div
                           style="
@@ -126,9 +144,16 @@
                             margin-left: 10px;
                           "
                         >
-                          <input v-model="replycontent" /><md-button
+                          <input
+                            v-model="replycontent"
+                            style="width: 220px"
+                          /><md-button
                             class="md-raised md-success"
-                            style="min-width: 40px"
+                            style="
+                              min-width: 20px !important;
+                              width: 60px;
+                              margin-left: 20px;
+                            "
                             @click="replay(item.id)"
                             >작성</md-button
                           >
@@ -198,6 +223,8 @@ export default {
       }
     },
     uploadReview() {
+      document.getElementById("mTxtArea").style.display = "none";
+
       http
         .post("/qna", {
           title: this.title,
@@ -251,3 +278,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.md-card-stats .md-card-header {
+  display: none !important;
+}
+.md-button-content {
+  margin-left: -13px;
+}
+</style>
