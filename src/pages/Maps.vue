@@ -216,16 +216,6 @@
             </button>
           </div>
         </div>
-        <b-container
-          v-if="aptList.length == 0"
-          class="p-2"
-          style="height: 100%"
-        >
-          <b-container class="p-5">
-            <h3><b-icon-emoji-expressionless></b-icon-emoji-expressionless></h3>
-            아파트 거래정보가 없습니다
-          </b-container>
-        </b-container>
         <div
           style="
             display: grid;
@@ -238,7 +228,7 @@
             style="
               margin-left: 20px;
               width: 165px;
-              height: 185px;
+              height: 165px;
               background-color: #545045;
               z-index: 50;
               border-radius: 1rem;
@@ -249,36 +239,20 @@
           >
             <p
               style="
-                color: yellow;
-                margin: 0px !important;
-                padding: 0px;
-                padding-top: 5px;
-                text-align: center;
-                cursor: pointer;
-              "
-              @click="favoriteApt(item.aptCode)"
-            >
-              <b-icon id="likeApt" icon="star" style="color: yellow"></b-icon>
-            </p>
-            <p
-              style="
                 color: #ffcd4a;
                 text-align: center;
-                margin-top: 0px;
-                margin-bottom: 0px;
+                margin-top: 15px;
                 font-weight: bold;
               "
             >
               {{ item.roadAddress }}
             </p>
-
             <h5
               style="
                 color: white;
                 text-align: center;
                 font-weight: bold;
                 margin: 0px;
-                margin-bottom: 10px;
                 line-height: 80%;
               "
             >
@@ -292,7 +266,7 @@
                 cursor: pointer;
                 line-height: 50%;
               "
-              @click="getAptDeals(item.aptCode, item)"
+              @click="getAptDeals(item.aptCode, item, { La })"
             >
               거래내역보기
             </p>
@@ -403,7 +377,7 @@ import http from "@/util/http-common";
 import HouseDeal from "./HouseInfo/HouseDeal.vue";
 import HouseReview from "./HouseInfo/HouseReview.vue";
 import HouseInfra from "./HouseInfo/HouseInfra.vue";
-import tokenDecoder from "@/util/token-decoder";
+
 export default {
   data() {
     return {
@@ -424,8 +398,6 @@ export default {
       curHouseInfo: null,
       infraMarkers: [],
       overlay: null,
-      token: null,
-      userNo: null,
     };
   },
   components: {
@@ -439,9 +411,6 @@ export default {
       this.sidoList = data;
       console.log(this.sidoList);
     });
-
-    this.token = sessionStorage.getItem("access-token");
-    this.userNo = tokenDecoder.decode(this.token).userNo;
   },
   mounted() {
     console.log("check");
@@ -464,24 +433,7 @@ export default {
     // ]),
     // ...mapMutations(["SET_HOME", "SET_POSITION", "SET_REVIEW_HOMECODE"]),
     // ...mapActions(memberStore, ["addInterest", "removeInterest"]),
-    favoriteApt(favAptCode) {
-      var con = document.getElementById("likeApt");
-      if (con.icon == "star") {
-        con.style.display = "star-fill";
-      } else if (con.icon == "star-fill") {
-        con.style.display = "star";
-      }
 
-      http
-        .post(`/user/${this.userNo}/watchlist`, {
-          aptCode: favAptCode,
-        })
-        .then(({ data }) => {
-          console.log(data);
-
-          console.log("관심목록추가완료");
-        });
-    },
     naverOpen(searchKeyword) {
       window.open(
         `https://search.naver.com/search.naver?query=${searchKeyword}`,
@@ -793,6 +745,7 @@ export default {
       this.floatingflag2 = false;
     },
     getAptDeals(aptCode, apt, marker) {
+      this.curHouseInfo = apt;
       http
         .get(`/map/apt/${aptCode}/deal`)
         .then(({ data }) => {
@@ -830,6 +783,7 @@ export default {
         content: content,
         map: this.map,
         position: marker.getPosition(),
+        zIndex: 40,
       });
 
       if (this.overlay) {
