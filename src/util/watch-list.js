@@ -55,7 +55,27 @@ function deleteWatchList(watchListId) {
 }
 
 export default {
-  getWatchList,
-  addWatchList,
-  deleteWatchList,
+  http
+        .post(`/qna/${boardid}/reply`, {
+          content: this.replycontent,
+          userNo: tokenDecoder.decode(this.token).userNo,
+        })
+        .then((response) => {
+          console.log(response.data);
+          console.log("댓글작성 성공");
+        })
+        .then(() => {
+          http
+            .get("/qna")
+            .then((response) => {
+              console.log(response.data);
+              this.qnaList = response.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 };

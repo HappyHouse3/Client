@@ -42,6 +42,7 @@
                   v-for="(item, idx) in cities"
                   :value="item.sidoCode"
                   :key="idx"
+                  :selected="city === item.sidoCode"
                 >
                   {{ item.sidoName }}
                 </option>
@@ -107,6 +108,7 @@
                   v-for="(item, idx) in cities"
                   :value="item.sidoCode"
                   :key="idx"
+                  :selected="city === item.sidoCode"
                 >
                   {{ item.sidoName }}
                 </option>
@@ -248,6 +250,7 @@ export default {
         });
     },
     async initData(payload) {
+      console.log();
       this.userNo = payload.userNo;
       await http
         .get(`/user/${this.userNo}`)
@@ -257,6 +260,7 @@ export default {
           this.nickName = data.nickName;
           this.email = data.email;
           this.city = data.sidoCode;
+          console.log("data");
           console.log(data);
           console.log(data.sidoCode);
           console.log(this.city);

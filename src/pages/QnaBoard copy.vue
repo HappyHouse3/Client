@@ -122,8 +122,8 @@
                         "
                       >
                         <div
-                          v-for="(item, index) in item.replyList"
-                          :key="index"
+                          v-for="item in item.replyList"
+                          :key="item.id"
                           style="
                             padding-left: 10px;
                             margin-top: 5px;
@@ -274,7 +274,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .md-card-stats .md-card-header {
   display: none !important;
 }
