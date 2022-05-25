@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { RegionTable } from "@/components";
+import RegionTable from "../components/Tables/RegionTable.vue";
 
 export default {
   components: {

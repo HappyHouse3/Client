@@ -8,6 +8,7 @@ import NoticeUpload from "@/pages/NoticeUpload.vue";
 import NoticeDetail from "@/pages/NoticeDetail.vue";
 import QnaBoard from "@/pages/QnaBoard.vue";
 import RegionBoard from "@/pages/RegionBoard.vue";
+import RegionBoardUpload from "@/pages/BoardUpload.vue";
 import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 
@@ -57,6 +58,11 @@ const routes = [
         path: "board",
         name: "Region Board",
         component: RegionBoard,
+      },
+      {
+        path: "board/upload",
+        name: "Board Upload",
+        component: RegionBoardUpload,
       },
       {
         path: "maps",
