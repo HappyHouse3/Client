@@ -1,19 +1,11 @@
 import { createStore } from "vuex";
-import Qna from "./qna.js";
 import Map from "./map.js";
-import memberStore from "./member.js";
-import noticeStore from "./notice.js";
-import review from "./review.js";
 import kakaoapi from "./kakaoapi.js";
 import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
   modules: {
-    qna: Qna,
     map: Map,
-    memberStore,
-    noticeStore,
-    review,
     kakaoapi,
   },
   state: {

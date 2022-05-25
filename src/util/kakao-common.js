@@ -4,7 +4,7 @@ import axios from "axios";
 export default axios.create({
   baseURL: "https://dapi.kakao.com/v2/local/search",
   headers: {
-    Authorization: "KakaoAK c4ba1ba2c1e6e86282071c520d88e0a4",
+    Authorization: "KakaoAK 6192592825fac8bebe29a0b5132db1f4",
     "Content-type": "application/json",
   },
 });

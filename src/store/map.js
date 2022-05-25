@@ -2,6 +2,7 @@ import http from "@/util/http-common";
 
 export default {
   state: {
+    map: "",
     sidos: [],
     guguns: [],
     dongs: [],

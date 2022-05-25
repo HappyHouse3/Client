@@ -580,7 +580,7 @@
               </b-tab>
 
               <b-tab title="인프라" style="height: 100%">
-                <house-infra :curHouseInfo="curHouseInfo" :map="map" @sendMarker="dispalyInfraMarker" />
+                <house-infra :curHouseInfo="curHouseInfo" />
               </b-tab>
               <b-tab title="리뷰" style="height: 100% !important">
                 <house-review :curHouseInfo="curHouseInfo" />
@@ -597,15 +597,19 @@
 </template>
 
 <script>
+import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
 import http from "@/util/http-common";
 
 import HouseDeal from "./HouseInfo/HouseDeal.vue";
 import HouseReview from "./HouseInfo/HouseReview.vue";
 import HouseInfra from "./HouseInfo/HouseInfra.vue";
 
+const memberStore = "memberStore";
+
 export default {
   data() {
     return {
+      map: "",
       selectedsido: "",
       selectedgugun: "",
       selecteddong: "",
@@ -621,7 +625,6 @@ export default {
       aptDeals: [],
       curAptCode: null,
       curHouseInfo: null,
-      infraMarkers: []
     };
   },
   components: {
@@ -635,6 +638,54 @@ export default {
       this.sidoList = data;
       console.log(this.sidoList);
     });
+
+    // this.setSidoList();
+  },
+  computed: {
+    ...mapGetters([
+      "getSidoList",
+      "getGugunList",
+      "getDongList",
+      "getHomeList",
+      "getBusList",
+      "getBicycleList",
+      "getSubwayList",
+    ]),
+    ...mapState(memberStore, ["memberInfo"]),
+  },
+  watch: {
+    "$store.state.map.homes": function () {
+      console.log(this.$store.state.map.homes);
+      this.getPlaces(this.$store.state.map.homes);
+      this.$router.push({ name: "MapSearchList" });
+    },
+    "$store.state.map.subways": function () {
+      this.addConvenienceMarker(this.$store.state.map.subways, "SUB");
+    },
+    "$store.state.map.bicycles": function () {
+      this.addConvenienceMarker(this.$store.state.map.bicycles, "BIC");
+    },
+    "$store.state.kakaoapi.hospitals": function () {
+      this.addConvenienceMarker(this.$store.state.kakaoapi.hospitals, "HOS");
+    },
+    "$store.state.kakaoapi.schools": function () {
+      this.addConvenienceMarker(this.$store.state.kakaoapi.schools, "SCH");
+    },
+    "$store.state.kakaoapi.cafes": function () {
+      this.addConvenienceMarker(this.$store.state.kakaoapi.cafes, "CAF");
+    },
+    "$store.state.kakaoapi.convenients": function () {
+      this.addConvenienceMarker(this.$store.state.kakaoapi.convenients, "CON");
+    },
+    "$store.state.kakaoapi.kids": function () {
+      this.addConvenienceMarker(this.$store.state.kakaoapi.kids, "KID");
+    },
+    "$store.state.map.busstations": function () {
+      this.addConvenienceMarker(this.$store.state.map.busstations, "BUS");
+    },
+    memberInfo: function () {
+      console.log("memberInfo");
+    },
   },
   mounted() {
     console.log("check");
@@ -675,6 +726,34 @@ export default {
       http.get(`/map/gugun/${event.target.value}`).then((response) => {
         this.gugunList = response.data;
       });
+    },
+    subwaymarker() {
+      //this.addConvenienceMarker(this.getSubwayList, "SUB");
+      this.setSubwayList(this.$store.state.map.curposition);
+      console.log(this.$store.state.map.curposition);
+    },
+    bicyclemarker() {
+      //this.addConvenienceMarker(this.getBicycleList, "BIC");
+      this.setBicycleList(this.$store.state.map.curposition);
+    },
+    busmarker() {
+      //this.addConvenienceMarker(this.getBusList, "BUS");
+      this.setBusList(this.$store.state.map.curposition);
+    },
+    hospitalmarker() {
+      this.setHospitalList(this.$store.state.map.curposition);
+    },
+    schoolmarker() {
+      this.setSchoolList(this.$store.state.map.curposition);
+    },
+    cafemarker() {
+      this.setCafeList(this.$store.state.map.curposition);
+    },
+    convenientmarker() {
+      this.setConvenientList(this.$store.state.map.curposition);
+    },
+    kidmarker() {
+      this.setKidList(this.$store.state.map.curposition);
     },
     changegugun(event) {
       console.log(event.target.value);
@@ -777,114 +856,114 @@ export default {
 
       return content;
     },
-    // addConvenienceMarker(places, type) {
-    //   console.log(places);
-    //   this.removeConvenientMarker();
+    addConvenienceMarker(places, type) {
+      console.log(places);
+      this.removeConvenientMarker();
 
-    //   //아파트숫자 마커 등록
-    //   for (const place of places) {
-    //     let position = "";
-    //     console.log(place);
-    //     let imageSrc = "";
-    //     let imageSize = "";
-    //     let imageOption = "";
-    //     let content = "";
-    //     if (type == "SUB") {
-    //       console.log("지하철뿌려주기");
-    //       (imageSrc = require("@/assets/img/subwayicon.jpg")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-    //         (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
-    //         (content = this.subwaycontent(place));
-    //       position = new kakao.maps.LatLng(place.lat, place.lng);
-    //     }
-    //     if (type == "BUS") {
-    //       console.log("버스뿌려주기");
-    //       (imageSrc = require("@/assets/img/busicon.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-    //         (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
-    //         (content = this.buscontent(place));
-    //       position = new kakao.maps.LatLng(place.lat, place.lng);
-    //     }
-    //     if (type == "BIC") {
-    //       console.log("자전거뿌려주기");
-    //       (imageSrc = require("@/assets/img/bicycleicon.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-    //         (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
-    //         (content = this.bicyclecontent(place));
-    //       position = new kakao.maps.LatLng(place.lat, place.lng);
-    //     }
-    //     if (type == "HOS") {
-    //       (imageSrc = require("@/assets/img/cart.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-    //         (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
-    //         (content = this.convenientcontent(place));
-    //       position = new kakao.maps.LatLng(place.y, place.x);
-    //     }
-    //     if (type == "SCH") {
-    //       (imageSrc = require("@/assets/img/school.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-    //         (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
-    //         (content = this.convenientcontent(place));
-    //       position = new kakao.maps.LatLng(place.y, place.x);
-    //     }
-    //     if (type == "CAF") {
-    //       (imageSrc = require("@/assets/img/cafe.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-    //         (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
-    //         (content = this.convenientcontent(place));
-    //       position = new kakao.maps.LatLng(place.y, place.x);
-    //     }
-    //     if (type == "KID") {
-    //       (imageSrc = require("@/assets/img/kid.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-    //         (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
-    //         (content = this.convenientcontent(place));
-    //       position = new kakao.maps.LatLng(place.y, place.x);
-    //     }
-    //     if (type == "CON") {
-    //       (imageSrc = require("@/assets/img/convenient.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
-    //         (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
-    //         (content = this.convenientcontent(place));
-    //       position = new kakao.maps.LatLng(place.y, place.x);
-    //     }
-    //     marker = new kakao.maps.Marker({
-    //       position: position, // 마커의 위치
-    //       image: markerImage,
-    //     });
-    //     var markerImage = new kakao.maps.MarkerImage(
-    //       imageSrc,
-    //       imageSize,
-    //       imageOption
-    //     );
-    //     var marker = new kakao.maps.Marker({
-    //       position: position, // 마커의 위치
-    //       image: markerImage,
-    //     });
-    //     // }
+      //아파트숫자 마커 등록
+      for (const place of places) {
+        let position = "";
+        console.log(place);
+        let imageSrc = "";
+        let imageSize = "";
+        let imageOption = "";
+        let content = "";
+        if (type == "SUB") {
+          console.log("지하철뿌려주기");
+          (imageSrc = require("@/assets/img/subwayicon.jpg")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
+            (content = this.subwaycontent(place));
+          position = new kakao.maps.LatLng(place.lat, place.lng);
+        }
+        if (type == "BUS") {
+          console.log("버스뿌려주기");
+          (imageSrc = require("@/assets/img/busicon.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
+            (content = this.buscontent(place));
+          position = new kakao.maps.LatLng(place.lat, place.lng);
+        }
+        if (type == "BIC") {
+          console.log("자전거뿌려주기");
+          (imageSrc = require("@/assets/img/bicycleicon.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
+            (content = this.bicyclecontent(place));
+          position = new kakao.maps.LatLng(place.lat, place.lng);
+        }
+        if (type == "HOS") {
+          (imageSrc = require("@/assets/img/cart.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
+            (content = this.convenientcontent(place));
+          position = new kakao.maps.LatLng(place.y, place.x);
+        }
+        if (type == "SCH") {
+          (imageSrc = require("@/assets/img/school.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
+            (content = this.convenientcontent(place));
+          position = new kakao.maps.LatLng(place.y, place.x);
+        }
+        if (type == "CAF") {
+          (imageSrc = require("@/assets/img/cafe.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
+            (content = this.convenientcontent(place));
+          position = new kakao.maps.LatLng(place.y, place.x);
+        }
+        if (type == "KID") {
+          (imageSrc = require("@/assets/img/kid.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
+            (content = this.convenientcontent(place));
+          position = new kakao.maps.LatLng(place.y, place.x);
+        }
+        if (type == "CON") {
+          (imageSrc = require("@/assets/img/convenient.png")), // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            (imageSize = new kakao.maps.Size(25, 25)), // 마커 이미지의 크기
+            (content = this.convenientcontent(place));
+          position = new kakao.maps.LatLng(place.y, place.x);
+        }
+        marker = new kakao.maps.Marker({
+          position: position, // 마커의 위치
+          image: markerImage,
+        });
+        var markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
+        var marker = new kakao.maps.Marker({
+          position: position, // 마커의 위치
+          image: markerImage,
+        });
+        // }
 
-    //     console.log(marker.getPosition());
-    //     marker.setMap(this.map); // 지도 위에 마커를 표출합니다
-    //     this.convenient_markers.push(marker); // 배열에 생성된 마커를 추가합니다
-    //     var map = this.map;
+        console.log(marker.getPosition());
+        marker.setMap(this.map); // 지도 위에 마커를 표출합니다
+        this.convenient_markers.push(marker); // 배열에 생성된 마커를 추가합니다
+        var map = this.map;
 
-    //     (function (marker) {
-    //       var infowindow = new kakao.maps.InfoWindow({ removable: true });
-    //       kakao.maps.event.addListener(marker, "click", () => {
-    //         //this.displayInfowindow(marker, title);
-    //         infowindow.setContent(content);
-    //         infowindow.setPosition(position);
-    //         infowindow.setMap(map);
-    //         // 커스텀 오버레이를 생성합니다
-    //         mapCustomOverlay = new kakao.maps.CustomOverlay({
-    //           position: marker.getPosition(),
-    //           content: content,
-    //           xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
-    //           yAnchor: 1.5, // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
-    //         });
-    //         // 커스텀 오버레이를 지도에 표시합니다
-    //         mapCustomOverlay.setMap(map);
-    //       });
+        (function (marker) {
+          var infowindow = new kakao.maps.InfoWindow({ removable: true });
+          kakao.maps.event.addListener(marker, "click", () => {
+            //this.displayInfowindow(marker, title);
+            infowindow.setContent(content);
+            infowindow.setPosition(position);
+            infowindow.setMap(map);
+            // 커스텀 오버레이를 생성합니다
+            mapCustomOverlay = new kakao.maps.CustomOverlay({
+              position: marker.getPosition(),
+              content: content,
+              xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+              yAnchor: 1.5, // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+            });
+            // 커스텀 오버레이를 지도에 표시합니다
+            mapCustomOverlay.setMap(map);
+          });
 
-    //       //클릭시
-    //       // kakao.maps.event.addListener(marker, "click", function() {
+          //클릭시
+          // kakao.maps.event.addListener(marker, "click", function() {
 
-    //       // });
-    //     })(marker);
-    //   }
-    // },
+          // });
+        })(marker);
+      }
+    },
     // async getPlaces(homes) {
     //   // 주소-좌표 변환 객체를 생성합니다
     //   var geocoder = new kakao.maps.services.Geocoder();
@@ -937,25 +1016,37 @@ export default {
         roadmapControl.className = "btn";
       }
     },
-    // removeMarker() {
-    //   for (var i = 0; i < this.apt_markers.length; i++) {
-    //     this.apt_markers[i].setMap(null);
-    //   }
-    //   this.apt_markers = [];
-    // },
-    // removeConvenientMarker() {
-    //   console.log("removeCheck");
-    //   for (var i = 0; i < this.convenient_markers.length; i++) {
-    //     this.convenient_markers[i].setMap(null);
-    //   }
-    //   this.convenient_markers = [];
-    // },
+    removeMarker() {
+      for (var i = 0; i < this.apt_markers.length; i++) {
+        this.apt_markers[i].setMap(null);
+      }
+      this.apt_markers = [];
+    },
+    removeConvenientMarker() {
+      console.log("removeCheck");
+      for (var i = 0; i < this.convenient_markers.length; i++) {
+        this.convenient_markers[i].setMap(null);
+      }
+      this.convenient_markers = [];
+    },
     zoomIn() {
       this.map.setLevel(this.map.getLevel() - 1);
     },
     zoomOut() {
       this.map.setLevel(this.map.getLevel() + 1);
     },
+    // interestArea() {
+    //   this.alert = true;
+    //   console.log(this.alert);
+
+    // if (this.selectedsido && this.selectedgugun && this.selecteddong) {
+    //   alert("관심등록 직전");
+    //   this.addInterest({
+    //     dongcode: this.selecteddong,
+    //     memberid: this.memberInfo.iduser,
+    //   });
+    // }
+    // },
     openfloating() {
       this.floatingflag = true;
     },
@@ -989,9 +1080,6 @@ export default {
       }
       this.curHouseInfo = apt;
     },
-    dispalyInfraMarker(markers) {
-
-    }
   },
   watch: {
     aptList: function () {
@@ -1022,6 +1110,11 @@ export default {
       });
     },
   },
+  // computed: {
+  //   aptListTemp: function () {
+  //     return this.aptList;
+  //   },
+  // },
 };
 </script>
 

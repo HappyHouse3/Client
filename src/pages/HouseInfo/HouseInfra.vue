@@ -102,6 +102,10 @@ export default {
     curHouseInfo: {
       default: null,
     },
+    map: {
+      map: Map,
+      default: "",
+    },
   },
   data() {
     return {
@@ -345,6 +349,134 @@ export default {
       else this.visible = [true, true, true, true, true, true];
       this.openStr = this.allVisible ? "모두 펼치기" : "모두 접기";
       this.allVisible = !this.allVisible;
+    },
+    makeMarker() {
+      let imageSize = new kakao.maps.Size(27, 28);
+      let imageOption = {
+        spriteSize: new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
+        spriteOrigin: new kakao.maps.Point(46, order * 36), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+        offset: new kakao.maps.Point(11, 28), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+      };
+
+      let tempMarkers = [];
+
+      // 마트 편의점
+      this.conveniences.forEach((element) => {
+        let imageSrc = require("@/assets/img/mart.png");
+
+        let markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
+
+        let markerPosition = new kakao.maps.LatLng(element.y, element.x);
+
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage,
+        });
+
+        tempMarkers.push(marker);
+      });
+
+      // 교육
+      this.educations.forEach((element) => {
+        let imageSrc = require("@/assets/img/education.png");
+
+        let markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
+
+        let markerPosition = new kakao.maps.LatLng(element.y, element.x);
+
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage,
+        });
+
+        tempMarkers.push(marker);
+      });
+
+      this.traffics.forEach((element) => {
+        let imageSrc = require("@/assets/img/subwayicon.png");
+
+        let markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
+
+        let markerPosition = new kakao.maps.LatLng(element.y, element.x);
+
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage,
+        });
+
+        tempMarkers.push(marker);
+      });
+
+      this.medicals.forEach((element) => {
+        let imageSrc = require("@/assets/img/cart.png");
+
+        let markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
+
+        let markerPosition = new kakao.maps.LatLng(element.y, element.x);
+
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage,
+        });
+
+        tempMarkers.push(marker);
+      });
+
+      this.cafes.forEach((element) => {
+        let imageSrc = require("@/assets/img/cafe.png");
+
+        let markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
+
+        let markerPosition = new kakao.maps.LatLng(element.y, element.x);
+
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage,
+        });
+
+        tempMarkers.push(marker);
+      });
+
+      this.cultures.forEach((element) => {
+        let imageSrc = require("@/assets/img/culture-icon.png");
+
+        let markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
+
+        let markerPosition = new kakao.maps.LatLng(element.y, element.x);
+
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage,
+        });
+
+        tempMarkers.push(marker);
+      });
+
+      this.$emit("sendMarker", tempMarkers);
     },
   },
 };
