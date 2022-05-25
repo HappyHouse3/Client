@@ -580,7 +580,11 @@
               </b-tab>
 
               <b-tab title="인프라" style="height: 100%">
-                <house-infra :curHouseInfo="curHouseInfo" :map="map" @sendMarker="dispalyInfraMarker" />
+                <house-infra
+                  :curHouseInfo="curHouseInfo"
+                  :map="map"
+                  @sendMarker="dispalyInfraMarker"
+                />
               </b-tab>
               <b-tab title="리뷰" style="height: 100% !important">
                 <house-review :curHouseInfo="curHouseInfo" />
@@ -621,7 +625,7 @@ export default {
       aptDeals: [],
       curAptCode: null,
       curHouseInfo: null,
-      infraMarkers: []
+      infraMarkers: [],
     };
   },
   components: {
@@ -641,22 +645,22 @@ export default {
     window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
   },
   methods: {
-    ...mapActions([
-      // "setSidoList",
-      "setGugunList",
-      "setDongList",
-      "setHomeList",
-      "setSubwayList",
-      "setBusList",
-      "setBicycleList",
-      "setHospitalList",
-      "setSchoolList",
-      "setCafeList",
-      "setConvenientList",
-      "setKidList",
-    ]),
-    ...mapMutations(["SET_HOME", "SET_POSITION", "SET_REVIEW_HOMECODE"]),
-    ...mapActions(memberStore, ["addInterest", "removeInterest"]),
+    // ...mapActions([
+    //   // "setSidoList",
+    //   "setGugunList",
+    //   "setDongList",
+    //   "setHomeList",
+    //   "setSubwayList",
+    //   "setBusList",
+    //   "setBicycleList",
+    //   "setHospitalList",
+    //   "setSchoolList",
+    //   "setCafeList",
+    //   "setConvenientList",
+    //   "setKidList",
+    // ]),
+    // ...mapMutations(["SET_HOME", "SET_POSITION", "SET_REVIEW_HOMECODE"]),
+    // ...mapActions(memberStore, ["addInterest", "removeInterest"]),
 
     naverOpen(searchKeyword) {
       window.open(
@@ -990,8 +994,18 @@ export default {
       this.curHouseInfo = apt;
     },
     dispalyInfraMarker(markers) {
+      console.log("인프라 마커 찍기 메서드 호출");
+      this.infraMarkers.forEach((marker) => {
+        marker.setMap(null);
+      });
 
-    }
+      this.infraMarkers = markers;
+
+      this.infraMarkers.forEach((marker) => {
+        console.log("인프라 마커 찍기");
+        marker.setMap(this.map);
+      });
+    },
   },
   watch: {
     aptList: function () {

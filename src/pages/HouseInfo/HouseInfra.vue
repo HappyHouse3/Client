@@ -401,7 +401,7 @@ export default {
       });
 
       this.traffics.forEach((element) => {
-        let imageSrc = require("@/assets/img/subwayicon.png");
+        let imageSrc = require("@/assets/img/subwayicon.jpg");
 
         let markerImage = new kakao.maps.MarkerImage(
           imageSrc,
@@ -458,7 +458,7 @@ export default {
       });
 
       this.cultures.forEach((element) => {
-        let imageSrc = require("@/assets/img/culture-icon.png");
+        let imageSrc = require("@/assets/img/culture-icon.jpg");
 
         let markerImage = new kakao.maps.MarkerImage(
           imageSrc,
