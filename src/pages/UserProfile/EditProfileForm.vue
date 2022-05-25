@@ -159,10 +159,11 @@ export default {
   },
   created() {
     this.token = sessionStorage.getItem("access-token");
+    this.getRequestData();
     if (this.token) {
       this.initData(tokenDecoder.decode(this.token));
     }
-    this.getRequestData();
+
     console.log(this.cities);
   },
   methods: {
@@ -216,6 +217,13 @@ export default {
         });
     },
     async registMember() {
+      console.log({
+        nickName: this.nickName,
+        email: this.email,
+        userId: this.userId,
+        password: this.password,
+        sidoCode: this.city,
+      });
       await http
         .post(`/signup`, {
           nickName: this.nickName,
@@ -249,16 +257,19 @@ export default {
           console.log(error);
         });
     },
-    initData(payload) {
+    async initData(payload) {
       this.userNo = payload.userNo;
-      http
+      await http
         .get(`/user/${this.userNo}`)
         .then(({ data }) => {
           this.userId = data.userId;
           this.password = data.password;
           this.nickName = data.nickName;
           this.email = data.email;
-          this.city = data.sidoName;
+          this.city = data.sidoCode;
+          console.log(data);
+          console.log(data.sidoCode);
+          console.log(this.city);
         })
         .catch((error) => {
           console.log(error);
