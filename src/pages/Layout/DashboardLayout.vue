@@ -21,9 +21,9 @@
         <md-icon>content_paste</md-icon>
         <p>공지사항</p>
       </sidebar-link>
-      <sidebar-link to="/board">
-        <md-icon>content_paste</md-icon>
-        <p>지역별 게시판</p>
+      <sidebar-link to="/board" v-if="token">
+        <md-icon>dashboard</md-icon>
+        <p>{{ sidoName }} 게시판</p>
       </sidebar-link>
       <sidebar-link to="/qna">
         <md-icon>library_books</md-icon>
@@ -61,6 +61,7 @@ import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "@/pages/Layout/MobileMenu.vue";
 import FixedPlugin from "./Extra/FixedPlugin.vue";
+import jwt_decode from "jwt-decode";
 
 export default {
   components: {
@@ -75,10 +76,14 @@ export default {
       sidebarBackground: "green",
       sidebarBackgroundImage: require("@/assets/img/sidebar-2.jpg"),
       token: null,
+      sidoName: null,
     };
   },
   created() {
     this.token = sessionStorage.getItem("access-token");
+    if (this.token) {
+      this.sidoName = jwt_decode(this.token).sidoName;
+    }
   },
 };
 </script>
