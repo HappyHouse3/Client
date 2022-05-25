@@ -480,7 +480,7 @@ export default {
 
           if (totalLat) {
             this.map.setCenter(new kakao.maps.LatLng(avgLat, avgLng));
-            this.map.setLevel(6);
+            this.map.setLevel(5);
           }
         });
       var con = document.getElementById("myDIV");
@@ -763,6 +763,8 @@ export default {
         this.curAptCode = aptCode;
       }
       this.curHouseInfo = apt;
+      this.map.setLevel(4);
+      this.map.setCenter(new kakao.maps.LatLng(apt.lat, apt.lng));
     },
     dispalyInfraMarker(markers) {
       console.log("인프라 마커 찍기 메서드 호출");
@@ -780,6 +782,11 @@ export default {
   },
   watch: {
     aptList: function () {
+      let imageSize = new kakao.maps.Size(43, 48);
+      let imageOption = {
+        offset: new kakao.maps.Point(11, 28), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+      };
+
       console.log("마커 찍기");
       this.apt_markers.forEach((marker) => {
         marker.setMap(null);
@@ -789,10 +796,19 @@ export default {
       this.apt_markers = [];
 
       this.aptList.forEach((apt) => {
+        let imageSrc = require("@/assets/img/house_marker.png");
+
+        let markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
+
         let markerPosition = new kakao.maps.LatLng(apt.lat, apt.lng);
         let marker = new kakao.maps.Marker({
           position: markerPosition,
           clickable: true,
+          image: markerImage,
         });
 
         marker.aptCode = apt.aptCode;
