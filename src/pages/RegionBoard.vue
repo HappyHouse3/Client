@@ -7,7 +7,9 @@
         <md-card>
           <md-card-header data-background-color="green">
             <h4 class="title jm-font">지역별 게시판</h4>
-            <p class="category">이곳은 {}게시판입니다.</p>
+            <p class="category">
+              이곳은 <span>{{ sidoName }}</span> 게시판입니다.
+            </p>
           </md-card-header>
           <md-card-content>
             <region-table table-header-color="green"></region-table>
@@ -20,10 +22,19 @@
 
 <script>
 import RegionTable from "../components/Tables/RegionTable.vue";
+import jwt_decode from "jwt-decode";
 
 export default {
   components: {
     RegionTable,
+  },
+  data() {
+    return {
+      sidoName: null,
+    };
+  },
+  created() {
+    this.sidoName = jwt_decode(sessionStorage.getItem("access-token")).sidoName;
   },
 };
 </script>
