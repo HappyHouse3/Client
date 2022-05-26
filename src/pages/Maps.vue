@@ -249,10 +249,25 @@
           >
             <p
               style="
+                color: yellow;
+                margin: 0px !important;
+                padding: 0px;
+                padding-top: 5px;
+                text-align: center;
+                cursor: pointer;
+              "
+              @click="favoriteApt(item.aptCode)"
+            >
+              <b-icon id="likeApt" icon="star" style="color: yellow"></b-icon>
+            </p>
+            <p
+              style="
                 color: #ffcd4a;
                 text-align: center;
                 margin-top: 15px;
                 font-weight: bold;
+                margin-top: 0px;
+                margin-bottom: 0px;
               "
             >
               {{ item.roadAddress }}
@@ -388,7 +403,7 @@ import http from "@/util/http-common";
 import HouseDeal from "./HouseInfo/HouseDeal.vue";
 import HouseReview from "./HouseInfo/HouseReview.vue";
 import HouseInfra from "./HouseInfo/HouseInfra.vue";
-
+import tokenDecoder from "@/util/token-decoder";
 export default {
   data() {
     return {
@@ -409,6 +424,8 @@ export default {
       curHouseInfo: null,
       infraMarkers: [],
       overlay: null,
+      token: null,
+      userNo: null,
     };
   },
   components: {
@@ -422,6 +439,8 @@ export default {
       this.sidoList = data;
       console.log(this.sidoList);
     });
+    this.token = sessionStorage.getItem("access-token");
+    this.userNo = tokenDecoder.decode(this.token).userNo;
   },
   mounted() {
     console.log("check");
@@ -444,7 +463,26 @@ export default {
     // ]),
     // ...mapMutations(["SET_HOME", "SET_POSITION", "SET_REVIEW_HOMECODE"]),
     // ...mapActions(memberStore, ["addInterest", "removeInterest"]),
+    favoriteApt(favAptCode) {
+      var con = document.getElementById("likeApt");
+      var con2 = document.getElementById("likeApt2");
 
+      if (con.style.display == "none") {
+        con.style.display = "block";
+        con2.style.display = "none";
+      } else if (con.style.display == "block") {
+        con.style.display = "none";
+        con2.style.display = "block";
+      }
+      http
+        .post(`/user/${this.userNo}/watchlist`, {
+          aptCode: favAptCode,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          alert("관심목록추가완료!");
+        });
+    },
     naverOpen(searchKeyword) {
       window.open(
         `https://search.naver.com/search.naver?query=${searchKeyword}`,

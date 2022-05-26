@@ -99,7 +99,11 @@
                     </p>
                     <h4
                       class="title"
-                      style="margin-top: 20px; text-align: left"
+                      style="
+                        margin-top: 20px;
+                        text-align: left;
+                        font-family: Y_Spotlight;
+                      "
                     >
                       {{ item.content }}
                     </h4>
