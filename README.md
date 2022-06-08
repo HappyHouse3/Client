@@ -2,8 +2,7 @@
 ## SSAFY 7기 1학기 최종 프로젝트
 ### 구미 5반 권도현 박지현
 
- 
-![Product Gif](https://s3.amazonaws.com/creativetim_bucket/github/gif/vue-material-dashboard.gif)
+
 
 Vue Material Dashboard is a beautiful resource built over [Vue Material](https://vuematerial.io/) and [Vuejs](https://vuejs.org/v2/guide/). It will help you get started developing dashboards in no time. Vue Material Dashboard is the official Vuejs version of the Original Material Dashboard. Using the Dashboard is pretty simple but requires basic knowledge of Javascript, [Vuejs](https://vuejs.org/v2/guide/) and [Vue Router](https://router.vuejs.org/en/).
 
@@ -74,79 +73,6 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## Documentation
 The documentation for the Vue Material Dashboard is hosted at our [website](https://demos.creative-tim.com/vue-material-dashboard/documentation).
-
-
-## File Structure
-Within the download you'll find the following directories and files:
-
-```
-vue-material-dashboard
-├── README.md
-├── babel.config.js
-├── package.json
-├── postcss.config.js
-├── public
-│   └── index.html
-└── src
-    ├── App.vue
-    ├── assets
-    │   ├── img
-    │   └── scss
-    │       ├── material-dashboard.scss
-    │       └── md
-    ├── components
-    │   ├── Cards
-    │   │   ├── ChartCard.vue
-    │   │   ├── NavTabsCard.vue
-    │   │   └── StatsCard.vue
-    │   ├── Dropdown.vue
-    │   ├── NotificationPlugin
-    │   │   ├── Notification.vue
-    │   │   ├── Notifications.vue
-    │   │   └── index.js
-    │   ├── SidebarPlugin
-    │   │   ├── SideBar.vue
-    │   │   ├── SidebarLink.vue
-    │   │   └── index.js
-    │   ├── Tables
-    │   │   ├── NavTabsTable.vue
-    │   │   ├── OrderedTable.vue
-    │   │   └── SimpleTable.vue
-    │   └── index.js
-    ├── globalComponents.js
-    ├── globalDirectives.js
-    ├── main.js
-    ├── material-dashboard.js
-    ├── pages
-    │   ├── Dashboard.vue
-    │   ├── Icons.vue
-    │   ├── Layout
-    │   │   ├── Content.vue
-    │   │   ├── ContentFooter.vue
-    │   │   ├── DashboardLayout.vue
-    │   │   ├── MobileMenu.vue
-    │   │   └── TopNavbar.vue
-    │   ├── Maps.vue
-    │   ├── Notifications.vue
-    │   ├── TableList.vue
-    │   ├── Typography.vue
-    │   ├── UpgradeToPRO.vue
-    │   ├── UserProfile
-    │   │   ├── EditProfileForm.vue
-    │   │   └── UserCard.vue
-    │   ├── UserProfile.vue
-    │   └── index.js
-    └── routes
-        └── routes.js
-```
-
-
-## Browser Support
-
-At present, we officially aim to support the last two versions of the following browsers:
-
-<img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
-
 
 ## Resources
 - Demo: <https://demos.creative-tim.com/vue-material-dashboard>
