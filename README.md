@@ -4,11 +4,8 @@
 
 
 
-Vue Material Dashboard is a beautiful resource built over [Vue Material](https://vuematerial.io/) and [Vuejs](https://vuejs.org/v2/guide/). It will help you get started developing dashboards in no time. Vue Material Dashboard is the official Vuejs version of the Original Material Dashboard. Using the Dashboard is pretty simple but requires basic knowledge of Javascript, [Vuejs](https://vuejs.org/v2/guide/) and [Vue Router](https://router.vuejs.org/en/).
+SSAFY 7기 1학기 과정을 진행하면서 개발한 부동산 실거래가 정보 조회 최종프로젝트입니다.
 
-We have created it thinking about things you actually need in a dashboard. Vue Material Dashboard contains handpicked and optimised Vuejs plugins. Everything is designed to fit with one another. As you will be able to see, the dashboard you can access on Creative Tim is a customisation of this product.
-
-Let us know what you think and what we can improve below. And good luck with development!
 
 
 ## Table of Contents
