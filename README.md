@@ -6,6 +6,7 @@
 
 SSAFY 7기 1학기 과정을 진행하면서 개발한 부동산 실거래가 정보 조회 최종프로젝트입니다.
 
+사용 언어 : vue js / SpringBoot / mySQL
 
 
 ## Table of Contents
