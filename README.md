@@ -88,15 +88,3 @@ We use GitHub Issues as the official bug tracker for the Vue Material Dashboard.
 3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
 
 
-## Technical Support or Questions
-
-If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us) instead of opening an issue.
-
-
-
-## Licensing
-
-- Copyright 2018 Creative Tim (https://www.creative-tim.com/)
-
-- Licensed under MIT (https://github.com/creativetimofficial/vue-material-dashboard/blob/master/LICENSE.md)
-
