@@ -72,19 +72,3 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 ## Documentation
 The documentation for the Vue Material Dashboard is hosted at our [website](https://demos.creative-tim.com/vue-material-dashboard/documentation).
 
-## Resources
-- Demo: <https://demos.creative-tim.com/vue-material-dashboard>
-- Download Page: <https://www.creative-tim.com/product/vue-material-dashboard>
-- Documentation: <https://demos.creative-tim.com/vue-material-dashboard/documentation>
-- License Agreement: <https://www.creative-tim.com/license>
-- Support: <https://www.creative-tim.com/contact-us>
-- Issues: [Github Issues Page](https://github.com/creativetimofficial/vue-material-dashboard/issues)
-## Reporting Issues
-
-We use GitHub Issues as the official bug tracker for the Vue Material Dashboard. Here are some advices for our users that want to report an issue:
-
-1. Make sure that you are using the latest version of the Vue Material Dashboard. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/).
-2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
-3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
-
-
