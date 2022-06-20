@@ -9,20 +9,6 @@ SSAFY 7기 1학기 과정을 진행하면서 개발한 부동산 실거래가 �
 사용 언어 : vue js / SpringBoot / mySQL
 
 
-## Table of Contents
-
-* [Versions](#versions)
-* [Demo](#demo)
-* [Quick Start](#quick-start)
-* [Documentation](#documentation)
-* [File Structure](#file-structure)
-* [Browser Support](#browser-support)
-* [Resources](#resources)
-* [Reporting Issues](#reporting-issues)
-* [Technical Support or Questions](#technical-support-or-questions)
-* [Licensing](#licensing)
-* [Useful Links](#useful-links)
-
 
 
 ## Versions
@@ -50,6 +36,22 @@ SSAFY 7기 1학기 과정을 진행하면서 개발한 부동산 실거래가 �
 
 [View More](https://demos.creative-tim.com/vue-material-dashboard).
 
+## 페이지 구성
+
+* 메인 화면
+* 회원가입/로그인
+<!-- * [Quick Start](#quick-start)
+* [Documentation](#documentation)
+* [File Structure](#file-structure)
+* [Browser Support](#browser-support)
+* [Resources](#resources)
+* [Reporting Issues](#reporting-issues)
+* [Technical Support or Questions](#technical-support-or-questions)
+* [Licensing](#licensing)
+* [Useful Links](#useful-links) -->
+
+
+
 
 ## Quick start
 
@@ -68,7 +70,4 @@ SSAFY 7기 1학기 과정을 진행하면서 개발한 부동산 실거래가 �
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-
-## Documentation
-The documentation for the Vue Material Dashboard is hosted at our [website](https://demos.creative-tim.com/vue-material-dashboard/documentation).
 
