@@ -18,30 +18,49 @@ SSAFY 7기 1학기 과정을 진행하면서 개발한 부동산 실거래가 �
 ## Demo
 [Demo Video](https://youtu.be/iPNu8L20c-I)
 
-| Dashboard | User Profile | Tables | Maps | Notification |
-| --- | --- | --- | --- | --- |
-| [![Start page](src/assets/github/dashboard.png)](https://demos.creative-tim.com/vue-material-dashboard) | [![User profile page](src/assets/github/user_profile.png)](https://demos.creative-tim.com/vue-material-dashboard/#/user) | [![Tables page ](src/assets/github/tables.png)](https://demos.creative-tim.com/vue-material-dashboard/#/table) | [![Maps Page](src/assets/github/maps.png)](https://demos.creative-tim.com/vue-material-dashboard/#/maps) | [![Notification page](src/assets/github/notification.png)](https://demos.creative-tim.com/vue-material-dashboard/#/notifications)
+| 회원가입/로그인 |
+| --- |
+| ![1](https://user-images.githubusercontent.com/57143818/181238909-d1372f0c-00ae-42ea-bd71-52a19e1fb46d.PNG)|
 
 
+| 아파트 거래내역 |
+| --- |
+| ![2](https://user-images.githubusercontent.com/57143818/181239255-40cf059f-8d56-4be7-b075-1ae67fc4b113.PNG)| 
+
+| 인프라 지수 |
+| --- |
+| ![3](https://user-images.githubusercontent.com/57143818/181239175-96e83cda-9503-4c4d-a2c5-84d633a281a2.PNG)|
+
+| 공지사항 게시판 |
+| --- |
+| ![4](https://user-images.githubusercontent.com/57143818/181239738-884a4bee-01fe-49b8-b66e-8f06ecaea309.PNG)|
+
+| Q&A 게시판 |
+| --- |
+|![5](https://user-images.githubusercontent.com/57143818/181239793-2e665c97-5911-4afd-b2ea-2454d2e69770.PNG)|
+
+| 지역별 게시판 |
+| --- |
+|![6](https://user-images.githubusercontent.com/57143818/181239810-d2788790-e931-4572-9666-35b3533bd6fa.PNG)|
+
+<br />
+<br />
 
 ## 페이지 구성
 
 * 메인 화면
 * 회원가입/로그인
-<!-- * [Quick Start](#quick-start)
-* [Documentation](#documentation)
-* [File Structure](#file-structure)
-* [Browser Support](#browser-support)
-* [Resources](#resources)
-* [Reporting Issues](#reporting-issues)
-* [Technical Support or Questions](#technical-support-or-questions)
-* [Licensing](#licensing)
-* [Useful Links](#useful-links) -->
+* 아파트 거래내역
+* 아파트 인프라 지수
+* 아파트 리뷰
+* 공지사항 게시판
+* Q&A 게시판
+* 지역별 게시판
+
+<br />
+<br />
 
 
-
-
-## Quick start
 
 ## :cloud: Build Setup
 
