@@ -1,4 +1,4 @@
-# Happy House
+# ⛪ Happy House
 
 SSAFY 7기 1학기 과정을 진행하면서 개발한 부동산 실거래가 정보 조회 최종프로젝트입니다.
 
@@ -9,14 +9,25 @@ SSAFY 7기 1학기 과정을 진행하면서 개발한 부동산 실거래가 �
 | [박지현](https://github.com/spy03128)  | [권도현](https://github.com/TobeyKwon) |
 
 
-## 기술스택
+## 🛠 기술스택
 
-[<img src="https://s3.amazonaws.com/creativetim_bucket/github/html.png" width="60" height="60" />](https://www.creative-tim.com/product/material-kit)
-[<img src="https://s3.amazonaws.com/creativetim_bucket/github/vuejs.png" width="60" height="60" />](https://www.creative-tim.com/product/vue-material-dashboard)
+| FrontEnd | BackEnd |
+| --- | --- |
+| <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> |<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> ![JPA](https://img.shields.io/badge/jpa-6DA55F.svg?style=for-the-badge&logo=springdatajpa&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-%230769AD.svg?style=for-the-badge&logo=mysql&logoColor=white) 
+
+## ⚙ 프로젝트구조
+
+### 🛢 ERD 
+![HappyHouse](https://user-images.githubusercontent.com/57143818/189530459-4e538855-57dd-4105-bfb9-cd630b7a2737.png)
+
+### 🖱 Class Diagram
+
+![class_diagram](https://user-images.githubusercontent.com/57143818/189530491-0a25da94-3633-4862-88f6-0d06c4ebc925.png)
 
 
-## Demo
-[Demo Video](https://youtu.be/iPNu8L20c-I)
+
+## 🎞 Demo
+🎬 [Demo Video](https://youtu.be/iPNu8L20c-I)
 
 | 회원가입/로그인 |
 | --- |
